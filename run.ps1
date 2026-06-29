@@ -1,0 +1,7 @@
+# Stop and remove existing container with the name paper-scraper if it exists to avoid conflicts
+docker stop paper-scraper 2>$null
+docker rm paper-scraper 2>$null
+
+# Run the container with the name 'paper-scraper'
+Write-Host "Starting Paper Scraper container..."
+docker run -p 5001:5000 --name paper-scraper paper-scraper

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE Xplore Metadata Scraper</title>
+    <meta name="description" content="A premium utility tool to scrape and extract titles, abstracts, and keywords from IEEE Xplore links.">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #090d16 0%, #111827 50%, #1e1b4b 100%);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.4);
+            --primary-hover: #4f46e5;
+            --accent: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-bg: rgba(17, 24, 39, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
+        }
+
+        /* Ambient background decorations */
+        .ambient-glow-1 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+            top: 10%;
+            left: 5%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .ambient-glow-2 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, rgba(168, 85, 247, 0) 70%);
+            bottom: 10%;
+            right: 5%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .logo-container {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        /* Glassmorphism panels */
+        .panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px var(--glass-shadow);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 1.1rem 1.25rem 1.1rem 3rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            color: var(--text-main);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input[type="url"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-glow);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        input[type="url"]:focus + .input-icon {
+            color: var(--primary);
+        }
+
+        button {
+            cursor: pointer;
+            outline: none;
+            border: none;
+            font-family: var(--font-family);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            padding: 1.1rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #ffffff;
+            border-radius: 1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Loader view */
+        .loader-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            text-align: center;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .spinner-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 4px solid rgba(99, 102, 241, 0.1);
+            border-top: 4px solid var(--primary);
+            border-right: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .spinner-inner {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin-back 0.8s linear infinite;
+        }
+
+        .loader-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .loader-subtext {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            max-width: 320px;
+            line-height: 1.4;
+        }
+
+        /* Error view */
+        .error-container {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 1.25rem;
+            border-radius: 1rem;
+            color: #fca5a5;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            align-items: center;
+            gap: 0.75rem;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        /* Results view */
+        .results-container {
+            display: none;
+            animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .paper-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 1.25rem;
+            color: #ffffff;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1.25rem;
+        }
+
+        /* Badges list */
+        .meta-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .badge i {
+            color: var(--primary);
+        }
+
+        .badge:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Details Section */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-content {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Keyword badges group */
+        .keyword-group {
+            margin-bottom: 1rem;
+        }
+
+        .keyword-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .keyword-type {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .keyword-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .pill {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            padding: 0.35rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .pill:hover {
+            background: rgba(99, 102, 241, 0.15);
+            transform: scale(1.02);
+        }
+
+        /* Result Actions */
+        .action-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1.5rem;
+        }
+
+        .btn-outline {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .btn-outline.active-success {
+            background: rgba(34, 197, 94, 0.1) !important;
+            border-color: rgba(34, 197, 94, 0.3) !important;
+            color: #86efac !important;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spin-back {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .form-group {
+                flex-direction: column;
+            }
+            .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+            .action-row {
+                flex-direction: column;
+            }
+            .action-row button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <i class="fa-solid fa-cube"></i>
+            </div>
+            <h1>IEEE Xplore Metadata Scraper</h1>
+            <p class="subtitle">Extract titles, abstracts, and keywords from academic papers instantly, bypassing protection scripts seamlessly.</p>
+        </header>
+
+        <main class="panel">
+            <form id="scraperForm" onsubmit="handleScrape(event)">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input 
+                            type="url" 
+                            id="paperUrl" 
+                            placeholder="Paste IEEE Xplore document link here (e.g. https://ieeexplore.ieee.org/document/...)" 
+                            required
+                        >
+                        <i class="fa-solid fa-link input-icon"></i>
+                    </div>
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <span>Scrape</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Error message container -->
+            <div class="error-container" id="errorBox">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="errorMessage">An error occurred while fetching the data.</span>
+            </div>
+        </main>
+
+        <!-- Loader overlay -->
+        <div class="panel loader-container" id="loader">
+            <div class="spinner-wrapper">
+                <div class="spinner"></div>
+                <div class="spinner-inner"></div>
+            </div>
+            <p class="loader-text" id="loaderMainText">Initializing browser engine...</p>
+            <p class="loader-subtext" id="loaderSubText">Solving WAF challenge on IEEE Xplore. This takes about 5 to 10 seconds.</p>
+        </div>
+
+        <!-- Scraped Result Container -->
+        <div class="panel results-container" id="results">
+            <h2 class="paper-title" id="resTitle">Shape Statistics for Image Segmentation with Prior</h2>
+            
+            <div class="meta-badges">
+                <div class="badge">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <span id="resAuthors">Guillaume Charpiat, Olivier Faugeras, Renaud Keriven</span>
+                </div>
+                <div class="badge">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span id="resYear">2007</span>
+                </div>
+                <div class="badge">
+                    <i class="fa-solid fa-fingerprint"></i>
+                    <span id="resDoi">10.1109/CVPR.2007.383009</span>
+                </div>
+                <a href="#" target="_blank" class="badge" id="resUrl" style="text-decoration: none;">
+                    <i class="fa-solid fa-up-right-from-square"></i>
+                    <span>Open in IEEE</span>
+                </a>
+            </div>
+
+            <div class="section-title">
+                <i class="fa-solid fa-align-left" style="color: var(--primary);"></i>
+                <span>Abstract</span>
+            </div>
+            <div class="section-content" id="resAbstract">
+                We propose a new approach to compute non-linear...
+            </div>
+
+            <div class="section-title">
+                <i class="fa-solid fa-tags" style="color: var(--accent);"></i>
+                <span>Keywords</span>
+            </div>
+            <div class="section-content" style="padding: 1.25rem;" id="resKeywordsContainer">
+                <!-- Keywords will be dynamically loaded here -->
+            </div>
+
+            <div class="action-row">
+                <button class="btn-outline" onclick="copyMarkdown()" id="copyBtn">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span>Copy Markdown</span>
+                </button>
+                <button class="btn-outline" onclick="downloadMarkdownFile()" id="downloadBtn">
+                    <i class="fa-solid fa-download"></i>
+                    <span>Download File (.md)</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPaperData = null;
+        let loaderTimer = null;
+        
+        const loaderSteps = [
+            { text: "Spawning browser instance...", sub: "Setting up sandboxed Playwright session." },
+            { text: "Navigating to IEEE Xplore...", sub: "Making handshake with the servers." },
+            { text: "Solving WAF verification...", sub: "Passing challenge.js verification checks." },
+            { text: "Parsing document structure...", sub: "Parsing JSON configuration elements on the page." },
+            { text: "Extracting paper content...", sub: "Compiling title, abstract, and keyword properties." }
+        ];
+
+        function startLoaderProgress() {
+            let stepIndex = 0;
+            const updateStep = () => {
+                const step = loaderSteps[stepIndex];
+                document.getElementById("loaderMainText").textContent = step.text;
+                document.getElementById("loaderSubText").textContent = step.sub;
+                stepIndex = (stepIndex + 1) % loaderSteps.length;
+            };
+            
+            updateStep();
+            loaderTimer = setInterval(updateStep, 3000);
+        }
+
+        function stopLoaderProgress() {
+            if (loaderTimer) {
+                clearInterval(loaderTimer);
+                loaderTimer = null;
+            }
+        }
+
+        async function handleScrape(event) {
+            event.preventDefault();
+            const urlInput = document.getElementById("paperUrl").value.strip ? document.getElementById("paperUrl").value.strip() : document.getElementById("paperUrl").value;
+            
+            // UI States
+            const errorBox = document.getElementById("errorBox");
+            const loader = document.getElementById("loader");
+            const results = document.getElementById("results");
+            const submitBtn = document.getElementById("submitBtn");
+            
+            errorBox.style.display = "none";
+            results.style.display = "none";
+            loader.style.display = "flex";
+            submitBtn.disabled = true;
+            
+            startLoaderProgress();
+            
+            try {
+                const response = await fetch("/scrape", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: urlInput })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    currentPaperData = result.data;
+                    renderResults(result.data);
+                } else {
+                    showError(result.error || "An error occurred while scraping the paper details.");
+                }
+            } catch (err) {
+                showError("Could not connect to the local scraper server. Make sure the Flask app is running.");
+            } finally {
+                stopLoaderProgress();
+                loader.style.display = "none";
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showError(message) {
+            document.getElementById("errorMessage").textContent = message;
+            document.getElementById("errorBox").style.display = "flex";
+        }
+
+        function renderResults(paper) {
+            document.getElementById("resTitle").textContent = paper.title;
+            document.getElementById("resAuthors").textContent = paper.authors;
+            document.getElementById("resYear").textContent = paper.year;
+            document.getElementById("resDoi").textContent = paper.doi;
+            document.getElementById("resUrl").href = paper.url;
+            document.getElementById("resAbstract").textContent = paper.abstract;
+            
+            // Render keywords
+            const keywordsContainer = document.getElementById("resKeywordsContainer");
+            keywordsContainer.innerHTML = "";
+            
+            const keys = Object.keys(paper.keywords);
+            if (keys.length > 0) {
+                keys.forEach(kType => {
+                    const groupDiv = document.createElement("div");
+                    groupDiv.className = "keyword-group";
+                    
+                    const typeHeader = document.createElement("div");
+                    typeHeader.className = "keyword-type";
+                    typeHeader.textContent = kType;
+                    groupDiv.appendChild(typeHeader);
+                    
+                    const pillsContainer = document.createElement("div");
+                    pillsContainer.className = "keyword-pills";
+                    
+                    paper.keywords[kType].forEach(kwd => {
+                        const pillSpan = document.createElement("span");
+                        pillSpan.className = "pill";
+                        pillSpan.textContent = kwd;
+                        pillsContainer.appendChild(pillSpan);
+                    });
+                    
+                    groupDiv.appendChild(pillsContainer);
+                    keywordsContainer.appendChild(groupDiv);
+                });
+            } else {
+                keywordsContainer.innerHTML = `<em style="color: var(--text-muted);">No keywords available for this paper.</em>`;
+            }
+            
+            // Show result panel
+            document.getElementById("results").style.display = "block";
+        }
+
+        function getPaperMarkdownText(paper) {
+            let md = `# IEEE Xplore Paper Metadata\n\n`;
+            md += `## ${paper.title}\n`;
+            md += `- **URL**: ${paper.url}\n`;
+            md += `- **Authors**: ${paper.authors}\n`;
+            md += `- **Publication Year**: ${paper.year}\n`;
+            md += `- **DOI**: ${paper.doi}\n\n`;
+            md += `### Abstract\n${paper.abstract}\n\n`;
+            md += `### Keywords\n`;
+            
+            const keys = Object.keys(paper.keywords);
+            if (keys.length > 0) {
+                keys.forEach(kType => {
+                    const keywordsStr = paper.keywords[kType].join(", ");
+                    md += `- **${kType}**: ${keywordsStr}\n`;
+                });
+            } else {
+                md += `*No keywords available.*\n`;
+            }
+            return md;
+        }
+
+        async function copyMarkdown() {
+            if (!currentPaperData) return;
+            const mdText = getPaperMarkdownText(currentPaperData);
+            
+            try {
+                await navigator.clipboard.writeText(mdText);
+                const copyBtn = document.getElementById("copyBtn");
+                const oldContent = copyBtn.innerHTML;
+                
+                copyBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>Copied!</span>`;
+                copyBtn.classList.add("active-success");
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = oldContent;
+                    copyBtn.classList.remove("active-success");
+                }, 2000);
+            } catch (err) {
+                alert("Failed to copy to clipboard.");
+            }
+        }
+
+        async function downloadMarkdownFile() {
+            if (!currentPaperData) return;
+            
+            try {
+                const response = await fetch("/download/markdown", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ paper: currentPaperData })
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    
+                    // Create download link
+                    const disposition = response.headers.get('content-disposition');
+                    let filename = "paper_metadata.md";
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        const matches = filenameRegex.exec(disposition);
+                        if (matches != null && matches[1]) { 
+                            filename = matches[1].replace(/['"]/g, '');
+                        }
+                    }
+                    
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+                } else {
+                    alert("Failed to download file.");
+                }
+            } catch (err) {
+                alert("Error downloading file: " + err);
+            }
+        }
+    </script>
+</body>
+</html>

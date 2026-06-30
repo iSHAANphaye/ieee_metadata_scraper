@@ -72,7 +72,7 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
             z-index: 1;
         }
 
@@ -80,6 +80,38 @@
             text-align: center;
             margin-bottom: 2.5rem;
             animation: fadeInDown 0.6s ease-out;
+            position: relative;
+        }
+
+        .user-badge {
+            display: none;
+            position: absolute;
+            top: -1rem;
+            right: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-logout {
+            background: transparent;
+            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+
+        .btn-logout:hover {
+            color: #f87171;
+            text-decoration: underline;
         }
 
         .logo-container {
@@ -93,7 +125,7 @@
         }
 
         h1 {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -0.025em;
             margin-bottom: 0.5rem;
@@ -105,9 +137,10 @@
         .subtitle {
             font-size: 1rem;
             color: var(--text-muted);
-            max-width: 480px;
+            max-width: 500px;
             margin: 0 auto;
             font-weight: 400;
+            line-height: 1.5;
         }
 
         /* Glassmorphism panels */
@@ -126,6 +159,152 @@
         .panel:hover {
             border-color: rgba(255, 255, 255, 0.12);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Authentication Panel CSS */
+        .auth-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+            gap: 1.5rem;
+        }
+
+        .auth-tab-btn {
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+        }
+
+        .auth-tab-btn.active {
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .auth-form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .auth-form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .auth-input-wrapper {
+            position: relative;
+        }
+
+        .auth-input-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.5rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem;
+            color: #fff;
+            outline: none;
+            font-family: var(--font-family);
+        }
+
+        .auth-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        /* Navigation bar */
+        .navigation-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Breadcrumbs navigation */
+        .breadcrumbs {
+            display: none;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb-item {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-item:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item.active {
+            color: var(--accent);
+            font-weight: 600;
+            cursor: default;
+            text-decoration: none;
+        }
+
+        .breadcrumb-separator {
+            font-size: 0.75rem;
         }
 
         .form-group {
@@ -203,13 +382,22 @@
             transform: translateY(0);
         }
 
+        .btn-primary:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+        }
+
         /* Loader view */
         .loader-container {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 3rem 1rem;
+            padding: 3.5rem 1rem;
             text-align: center;
             animation: fadeIn 0.4s ease-out;
         }
@@ -242,17 +430,17 @@
         }
 
         .loader-text {
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 1.25rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
             color: #fff;
         }
 
         .loader-subtext {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
-            max-width: 320px;
-            line-height: 1.4;
+            max-width: 380px;
+            line-height: 1.5;
         }
 
         /* Error view */
@@ -277,9 +465,9 @@
         }
 
         .paper-title {
-            font-size: 1.6rem;
+            font-size: 1.65rem;
             font-weight: 700;
-            line-height: 1.35;
+            line-height: 1.4;
             margin-bottom: 1.25rem;
             color: #ffffff;
             border-bottom: 1px solid var(--glass-border);
@@ -317,6 +505,20 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
+        a.badge {
+            text-decoration: none;
+        }
+
+        .badge-cache-indicator {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+
+        .badge-cache-indicator i {
+            color: #4ade80;
+        }
+
         /* Details Section */
         .section-title {
             font-size: 1.1rem;
@@ -333,7 +535,7 @@
             border: 1px solid var(--glass-border);
             border-radius: 1rem;
             padding: 1.25rem;
-            line-height: 1.6;
+            line-height: 1.65;
             color: #cbd5e1;
             font-size: 0.95rem;
             margin-bottom: 2rem;
@@ -401,16 +603,376 @@
             gap: 0.5rem;
         }
 
-        .btn-outline:hover {
+        .btn-outline:hover:not(:disabled) {
             background: rgba(255, 255, 255, 0.05);
             border-color: rgba(255, 255, 255, 0.2);
             color: #fff;
+        }
+
+        .btn-outline:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .btn-outline.active-success {
             background: rgba(34, 197, 94, 0.1) !important;
             border-color: rgba(34, 197, 94, 0.3) !important;
             color: #86efac !important;
+        }
+
+        /* Discover Connected Papers Section */
+        .connected-section {
+            margin-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+        }
+
+        .connected-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .connected-tabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.25rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tab-btn {
+            padding: 0.5rem 1.25rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: #ffffff;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+        }
+
+        .quick-select-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-select-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-select-pill {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: #e2e8f0;
+            border-radius: 0.4rem;
+        }
+
+        .btn-select-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        /* List layout */
+        .connected-list-container {
+            max-height: 350px;
+            overflow-y: auto;
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .connected-list-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .connected-list-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .connected-list-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .connected-list-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .connected-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: var(--transition);
+            border-radius: 0.5rem;
+        }
+
+        .connected-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .connected-item:last-child {
+            border-bottom: none;
+        }
+
+        .connected-checkbox-wrapper {
+            padding-top: 0.2rem;
+        }
+
+        /* Custom Checkbox */
+        .checkbox-container {
+            display: block;
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 18px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.3rem;
+            transition: var(--transition);
+        }
+
+        .checkbox-container:hover input ~ .checkmark {
+            border-color: var(--primary);
+        }
+
+        .checkbox-container input:checked ~ .checkmark {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-container .checkmark:after {
+            left: 5px;
+            top: 2px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .connected-info {
+            flex-grow: 1;
+        }
+
+        .connected-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #f8fafc;
+            line-height: 1.4;
+            margin-bottom: 0.4rem;
+        }
+
+        .connected-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .connected-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .connected-badge-unscrapable {
+            padding: 0.15rem 0.4rem;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border-radius: 0.3rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Bulk Action execution panel */
+        .bulk-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .bulk-count-label {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .bulk-count-label strong {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        /* Subpages Display Container */
+        .subpages-section {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .subpages-header {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.75rem;
+        }
+
+        .subpage-card {
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .subpage-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .subpage-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            gap: 1rem;
+        }
+
+        .subpage-card-header-info {
+            flex-grow: 1;
+        }
+
+        .subpage-card-toggle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            margin-top: 0.25rem;
+        }
+
+        .subpage-card.collapsed .subpage-card-body {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            margin-top: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .subpage-card-body {
+            max-height: 1500px;
+            opacity: 1;
+            padding-top: 1.25rem;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .subpage-card.collapsed .subpage-card-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .subpage-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .subpage-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            gap: 0.75rem;
+        }
+
+        .btn-sub-explore {
+            padding: 0.4rem 0.85rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #fff;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-sub-explore:hover {
+            filter: brightness(1.15);
         }
 
         /* Animations */
@@ -473,6 +1035,22 @@
                 width: 100%;
                 justify-content: center;
             }
+            .connected-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .connected-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+            .bulk-action-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .bulk-action-bar button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -486,120 +1064,750 @@
                 <i class="fa-solid fa-cube"></i>
             </div>
             <h1>Paper Scraper</h1>
-            <p class="subtitle">Extract titles, abstracts, and keywords from academic papers instantly, bypassing protection scripts seamlessly.</p>
+            <p class="subtitle">Extract titles, abstracts, and keywords from academic papers instantly. Solve WAF verification, check citations, and bulk scrape connected papers recursively.</p>
+            
+            <div class="user-badge" id="userBadge">
+                <span><i class="fa-regular fa-circle-user" style="color: var(--primary);"></i> <span id="userEmailLabel">user@example.com</span></span>
+                <button class="btn-logout" onclick="handleLogout()">Log Out</button>
+            </div>
         </header>
 
-        <main class="panel">
-            <form id="scraperForm" onsubmit="handleScrape(event)">
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <input 
-                            type="url" 
-                            id="paperUrl" 
-                            placeholder="Paste IEEE Xplore document link here (e.g. https://ieeexplore.ieee.org/document/...)" 
-                            required
-                        >
-                        <i class="fa-solid fa-link input-icon"></i>
-                    </div>
-                    <button type="submit" class="btn-primary" id="submitBtn">
-                        <span>Scrape</span>
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </button>
-                </div>
-            </form>
-
-            <!-- Error message container -->
-            <div class="error-container" id="errorBox">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span id="errorMessage">An error occurred while fetching the data.</span>
-            </div>
-        </main>
-
-        <!-- Loader overlay -->
-        <div class="panel loader-container" id="loader">
-            <div class="spinner-wrapper">
-                <div class="spinner"></div>
-                <div class="spinner-inner"></div>
-            </div>
-            <p class="loader-text" id="loaderMainText">Initializing browser engine...</p>
-            <p class="loader-subtext" id="loaderSubText">Solving WAF challenge on IEEE Xplore. This takes about 5 to 10 seconds.</p>
+        <!-- Navigation Tabs (Visible when logged in) -->
+        <div class="navigation-bar" id="navigationBar" style="display: none;">
+            <button class="nav-btn active" id="nav-btn-dashboard" onclick="switchDashboardTab('workspace')">
+                <i class="fa-solid fa-laptop-code"></i>
+                <span>Workspace</span>
+            </button>
+            <button class="nav-btn" id="nav-btn-history" onclick="switchDashboardTab('history')">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Scrape History</span>
+            </button>
+            <button class="nav-btn" id="nav-btn-ieee-search" onclick="switchDashboardTab('ieee-search-tab')">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                <span>IEEE Similarity Search</span>
+            </button>
+            <button class="nav-btn" id="nav-btn-batch-compare" onclick="switchDashboardTab('batch-compare')">
+                <i class="fa-solid fa-code-compare"></i>
+                <span>Batch Comparison</span>
+            </button>
         </div>
 
-        <!-- Scraped Result Container -->
-        <div class="panel results-container" id="results">
-            <h2 class="paper-title" id="resTitle">Shape Statistics for Image Segmentation with Prior</h2>
+        <!-- Auth Panel (Shown if not logged in) -->
+        <div class="panel" id="authPanel">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab-btn active" id="authTabLogin" onclick="switchAuthTab('login')">Sign In</button>
+                    <button class="auth-tab-btn" id="authTabSignup" onclick="switchAuthTab('signup')">Register</button>
+                </div>
+                
+                <form id="authForm" onsubmit="handleAuth(event)">
+                    <div class="auth-form-group">
+                        <label for="authEmail">Email Address</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="authEmail" class="auth-input" placeholder="name@domain.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-form-group">
+                        <label for="authPassword">Password</label>
+                        <div class="auth-input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="authPassword" class="auth-input" placeholder="••••••••" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;" id="btnAuthSubmit">
+                        <span id="authSubmitText">Sign In</span>
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    </button>
+                </form>
+                
+                <div class="error-container" id="authError" style="margin-top: 1rem;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="authErrorMessage">Invalid email or password.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Workspace (Shown if logged in) -->
+        <div id="dashboardPanel" style="display: none;">
+            <div class="panel">
+                <form id="scraperForm" onsubmit="handleScrape(event)">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input 
+                                type="url" 
+                                id="paperUrl" 
+                                placeholder="Paste IEEE Xplore document link here (e.g. https://ieeexplore.ieee.org/document/...)" 
+                                required
+                            >
+                            <i class="fa-solid fa-link input-icon"></i>
+                        </div>
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            <span>Scrape</span>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Error message container -->
+                <div class="error-container" id="errorBox">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="errorMessage">An error occurred while fetching the data.</span>
+                </div>
+            </div>
+
+            <!-- Loader overlay -->
+            <div class="panel loader-container" id="loader">
+                <div class="spinner-wrapper">
+                    <div class="spinner"></div>
+                    <div class="spinner-inner"></div>
+                </div>
+                <p class="loader-text" id="loaderMainText">Initializing browser engine...</p>
+                <p class="loader-subtext" id="loaderSubText">Solving WAF challenge on IEEE Xplore. This takes about 5 to 10 seconds.</p>
+            </div>
+
+            <!-- Scraped Result Container -->
+            <div class="panel results-container" id="results">
+                <!-- Breadcrumbs -->
+                <div class="breadcrumbs" id="breadcrumbsPanel">
+                    <span class="breadcrumb-item" onclick="resetNavigation()">Home</span>
+                </div>
+
+                <h2 class="paper-title" id="resTitle">Shape Statistics for Image Segmentation with Prior</h2>
+                
+                <div class="meta-badges">
+                    <div class="badge badge-cache-indicator" id="cacheBadge" style="display: none;">
+                        <i class="fa-solid fa-database"></i>
+                        <span>MongoDB Cache Hit</span>
+                    </div>
+                    <div class="badge" id="timeBadge" style="display: none; background: rgba(99, 102, 241, 0.1); border-color: rgba(99, 102, 241, 0.2);">
+                        <i class="fa-regular fa-clock" style="color: var(--primary);"></i>
+                        <span>Processed in 0.00s</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fa-solid fa-user-pen"></i>
+                        <span id="resAuthors">Guillaume Charpiat, Olivier Faugeras, Renaud Keriven</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span id="resYear">2007</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fa-solid fa-fingerprint"></i>
+                        <span id="resDoi">10.1109/CVPR.2007.383009</span>
+                    </div>
+                    <a href="#" target="_blank" class="badge" id="resUrl">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                        <span>Open in IEEE</span>
+                    </a>
+                </div>
+
+                <div class="section-title">
+                    <i class="fa-solid fa-align-left" style="color: var(--primary);"></i>
+                    <span>Abstract</span>
+                </div>
+                <div class="section-content" id="resAbstract">
+                    Abstract text...
+                </div>
+
+                <div class="section-title">
+                    <i class="fa-solid fa-tags" style="color: var(--accent);"></i>
+                    <span>Keywords</span>
+                </div>
+                <div class="section-content" style="padding: 1.25rem;" id="resKeywordsContainer">
+                    <!-- Keywords badges -->
+                </div>
+
+                <div class="action-row" id="singleActions">
+                    <button class="btn-outline" onclick="copyMarkdownSingle()" id="copyBtn">
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Copy Markdown</span>
+                    </button>
+                    <button class="btn-outline" onclick="downloadMarkdownSingle()" id="downloadBtn">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download File (.md)</span>
+                    </button>
+                </div>
+
+                <!-- Connected papers discovery section -->
+                <div class="connected-section" id="connectedPapersSection">
+                    <div class="section-title">
+                        <i class="fa-solid fa-network-wired" style="color: var(--accent);"></i>
+                        <span>Discover Connected Papers</span>
+                    </div>
+                    
+                    <div class="connected-header-row">
+                        <div class="connected-tabs">
+                            <button class="tab-btn active" onclick="switchTab('citations')" id="tab-citations">Citations (0)</button>
+                            <button class="tab-btn" onclick="switchTab('references')" id="tab-references">References (0)</button>
+                            <button class="tab-btn" onclick="switchTab('similar')" id="tab-similar">Similar Papers (0)</button>
+                            <button class="tab-btn" onclick="switchTab('local-matcher')" id="tab-local-matcher">Database Matches (0)</button>
+                        </div>
+                        
+                        <div class="quick-select-row">
+                            <span class="quick-select-label">Select:</span>
+                            <button class="btn-select-pill" onclick="selectQuick(2)">Top 2</button>
+                            <button class="btn-select-pill" onclick="selectQuick(5)">Top 5</button>
+                            <button class="btn-select-pill" onclick="selectQuick(10)">Top 10</button>
+                            <button class="btn-select-pill" onclick="selectAllConnected(true)">All</button>
+                            <button class="btn-select-pill" onclick="selectAllConnected(false)">None</button>
+                        </div>
+                    </div>
+
+                    <div class="connected-list-container" id="connectedList">
+                        <!-- Dynamic list entries -->
+                    </div>
+
+                    <div class="bulk-action-bar">
+                        <div class="bulk-count-label">
+                            Selected papers to scrape: <strong id="selectedCount">0</strong>
+                        </div>
+                        <button class="btn-primary" id="btnBulkScrape" onclick="executeBulkScrape()" disabled>
+                            <span>Scrape Selected Papers</span>
+                            <i class="fa-solid fa-layer-group"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subpages Scraped Results List -->
+            <div class="subpages-section" id="subpagesSection">
+                <div class="subpages-header">
+                    <i class="fa-solid fa-file-invoice" style="color: var(--primary);"></i>
+                    <span>Scraped Subpages Metadata</span>
+                </div>
+
+                <div id="subpagesList">
+                    <!-- Subpages cards dynamically rendered here -->
+                </div>
+
+                <div class="panel" style="margin-top: 1.5rem;">
+                    <div class="section-title">
+                        <i class="fa-solid fa-file-export" style="color: var(--accent);"></i>
+                        <span>Export All Metadata</span>
+                    </div>
+                    <p class="subtitle" style="text-align: left; margin: 0 0 1.25rem 0; font-size: 0.9rem;">
+                        Download the combined metadata for both the original paper and all successfully scraped connected subpages.
+                    </p>
+                    <div class="action-row" style="border-top: none; padding-top: 0; justify-content: flex-start;">
+                        <button class="btn-outline" onclick="copyMarkdownCombined()" id="copyCombinedBtn">
+                            <i class="fa-regular fa-clipboard"></i>
+                            <span>Copy Combined Markdown</span>
+                        </button>
+                        <button class="btn-outline" onclick="downloadCombinedMarkdown()" id="downloadCombinedMdBtn">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Download Combined (.md)</span>
+                        </button>
+                        <button class="btn-outline" onclick="downloadCombinedJson()" id="downloadCombinedJsonBtn">
+                            <i class="fa-solid fa-file-code"></i>
+                            <span>Download Combined (.json)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrape History Panel (Shown if logged in) -->
+        <div class="panel" id="historyPanel" style="display: none; animation: fadeInUp 0.5s ease-out;">
+            <div class="section-title">
+                <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i>
+                <span>Scraped Papers Registry</span>
+            </div>
+            <p class="subtitle" style="text-align: left; margin: 0 0 1.5rem 0; font-size: 0.9rem;">
+                A collection of all papers scraped by your account. Click 'Load in Workspace' to bring any paper back into the active workspace.
+            </p>
             
-            <div class="meta-badges">
-                <div class="badge">
-                    <i class="fa-solid fa-user-pen"></i>
-                    <span id="resAuthors">Guillaume Charpiat, Olivier Faugeras, Renaud Keriven</span>
-                </div>
-                <div class="badge">
-                    <i class="fa-solid fa-calendar-days"></i>
-                    <span id="resYear">2007</span>
-                </div>
-                <div class="badge">
-                    <i class="fa-solid fa-fingerprint"></i>
-                    <span id="resDoi">10.1109/CVPR.2007.383009</span>
-                </div>
-                <a href="#" target="_blank" class="badge" id="resUrl" style="text-decoration: none;">
-                    <i class="fa-solid fa-up-right-from-square"></i>
-                    <span>Open in IEEE</span>
-                </a>
+            <div id="historyListContainer" style="display: flex; flex-direction: column; gap: 1rem;">
+                <!-- History cards dynamically rendered here -->
             </div>
+        </div>
 
+        <!-- IEEE Similarity Search Panel (Shown if logged in) -->
+        <div class="panel" id="ieeeSearchTabPanel" style="display: none; animation: fadeInUp 0.5s ease-out;">
             <div class="section-title">
-                <i class="fa-solid fa-align-left" style="color: var(--primary);"></i>
-                <span>Abstract</span>
+                <i class="fa-solid fa-magnifying-glass-chart" style="color: var(--accent);"></i>
+                <span>IEEE Similarity Search Engine</span>
             </div>
-            <div class="section-content" id="resAbstract">
-                We propose a new approach to compute non-linear...
+            <p class="subtitle" style="text-align: left; margin: 0 0 1.5rem 0; font-size: 0.9rem;">
+                Enter any IEEE Xplore document URL to dynamically discover similar literature directly from the live IEEE database.
+            </p>
+            
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <div class="input-wrapper">
+                    <input 
+                        type="url" 
+                        id="similarSearchUrl" 
+                        placeholder="Paste IEEE Xplore document link to find similar papers..." 
+                        required
+                    >
+                    <i class="fa-solid fa-link input-icon"></i>
+                </div>
+                <button type="button" class="btn-primary" onclick="performStandaloneSimilarSearch()" id="btnStandaloneSearch">
+                    <span>Find Similar</span>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
             </div>
 
+            <div id="standaloneSearchLoader" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(255, 255, 255, 0.01); border: 1px dashed var(--glass-border); border-radius: 1rem; margin-bottom: 2rem;">
+                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; margin-bottom: 0.25rem;" id="standaloneLoaderText">Solving WAF challenge & establishing session...</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;" id="standaloneLoaderSub">Constructing Boolean keyword recommendations query...</p>
+            </div>
+
+            <div id="standaloneSearchResultsSection" style="display: none;">
+                <div class="section-title" style="font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span>
+                        <i class="fa-solid fa-list-check" style="color: var(--primary);"></i>
+                        <span>Live Recommendations from IEEE</span>
+                    </span>
+                    <span class="badge" id="standaloneTimeBadge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">Processed in 0.00s</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <div class="quick-select-row" style="margin-bottom: 0;">
+                        <span class="quick-select-label">Select:</span>
+                        <button class="btn-select-pill" onclick="selectStandaloneQuick(2)">Top 2</button>
+                        <button class="btn-select-pill" onclick="selectStandaloneQuick(5)">Top 5</button>
+                        <button class="btn-select-pill" onclick="selectStandaloneQuick(10)">Top 10</button>
+                        <button class="btn-select-pill" onclick="selectStandaloneAll(true)">All</button>
+                        <button class="btn-select-pill" onclick="selectStandaloneAll(false)">None</button>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label for="standaloneSortSelect" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Sort By:</label>
+                        <select id="standaloneSortSelect" onchange="handleStandaloneSortChange()" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: #ffffff; padding: 0.25rem 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer;">
+                            <option value="similarity">Similarity (High to Low)</option>
+                            <option value="date-newest">Date (Newest First)</option>
+                            <option value="date-oldest">Date (Oldest First)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="standaloneSearchList" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+                    <!-- Results checkable cards -->
+                </div>
+
+                <div class="bulk-action-bar" style="margin-top: 1rem;">
+                    <div class="bulk-count-label">
+                        Selected papers to scrape: <strong id="standaloneSelectedCount">0</strong>
+                    </div>
+                    <button class="btn-primary" id="btnStandaloneBulkScrape" onclick="executeStandaloneBulkScrape()" disabled>
+                        <span>Scrape Selected Papers</span>
+                        <i class="fa-solid fa-layer-group"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Comparison Panel (Shown if logged in) -->
+        <div class="panel" id="batchComparePanel" style="display: none; animation: fadeInUp 0.5s ease-out;">
             <div class="section-title">
-                <i class="fa-solid fa-tags" style="color: var(--accent);"></i>
-                <span>Keywords</span>
+                <i class="fa-solid fa-code-compare" style="color: var(--primary);"></i>
+                <span>Batch Similarity Comparator</span>
             </div>
-            <div class="section-content" style="padding: 1.25rem;" id="resKeywordsContainer">
-                <!-- Keywords will be dynamically loaded here -->
+            <p class="subtitle" style="text-align: left; margin: 0 0 1.5rem 0; font-size: 0.9rem;">
+                Compare a single target paper against a custom batch of candidate papers. Enter the target URL, list the candidate URLs, and analyze similarity metrics dynamically.
+            </p>
+            
+            <div class="form-group" style="margin-bottom: 1.5rem; flex-direction: column; align-items: stretch; gap: 0.5rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.25rem;">Target Paper URL</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="url" 
+                        id="batchTargetUrl" 
+                        placeholder="Paste target IEEE Xplore document link..." 
+                        required
+                    >
+                    <i class="fa-solid fa-crosshairs input-icon"></i>
+                </div>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 2rem; flex-direction: column; align-items: stretch; gap: 0.5rem;">
+                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.25rem;">Candidate Papers Batch (One URL per line)</label>
+                <textarea 
+                    id="batchCandidateUrls" 
+                    placeholder="https://ieeexplore.ieee.org/document/11523120&#10;https://ieeexplore.ieee.org/document/11482805"
+                    rows="6"
+                    style="width: 100%; padding: 0.75rem 1rem; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 0.75rem; color: #ffffff; font-family: monospace; font-size: 0.85rem; resize: vertical; outline: none; line-height: 1.5;"
+                ></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+                <button type="button" class="btn-primary" onclick="performBatchComparison()" id="btnBatchCompare">
+                    <span>Compare Batch</span>
+                    <i class="fa-solid fa-right-left"></i>
+                </button>
+                <button type="button" class="btn-secondary" onclick="useActiveAsBatchTarget()" id="btnUseActiveTarget">
+                    <span>Use Active Paper</span>
+                    <i class="fa-solid fa-file-invoice"></i>
+                </button>
             </div>
 
-            <div class="action-row">
-                <button class="btn-outline" onclick="copyMarkdown()" id="copyBtn">
-                    <i class="fa-regular fa-clipboard"></i>
-                    <span>Copy Markdown</span>
-                </button>
-                <button class="btn-outline" onclick="downloadMarkdownFile()" id="downloadBtn">
-                    <i class="fa-solid fa-download"></i>
-                    <span>Download File (.md)</span>
-                </button>
+            <!-- Loader for Batch Scrape progress -->
+            <div id="batchCompareLoader" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(255, 255, 255, 0.01); border: 1px dashed var(--glass-border); border-radius: 1rem; margin-bottom: 2rem;">
+                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; margin-bottom: 0.25rem;" id="batchLoaderText">Initializing Comparison...</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;" id="batchLoaderSub">Resolving target document metadata...</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="batchCompareResultsSection" style="display: none;">
+                <div class="section-title" style="font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span>
+                        <i class="fa-solid fa-square-poll-horizontal" style="color: var(--accent);"></i>
+                        <span>Batch Comparison Metrics</span>
+                    </span>
+                    <span class="badge" id="batchTimeBadge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">Processed in 0.00s</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <div style="font-size: 0.85rem; color: var(--text-muted);">
+                        Target: <strong id="batchResultsTargetTitle" style="color: #ffffff;">Target Paper Title</strong>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <label for="batchSortSelect" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Sort By:</label>
+                        <select id="batchSortSelect" onchange="handleBatchSortChange()" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: #ffffff; padding: 0.25rem 0.5rem; font-size: 0.85rem; outline: none; cursor: pointer;">
+                            <option value="similarity">Similarity (High to Low)</option>
+                            <option value="date-newest">Date (Newest First)</option>
+                            <option value="date-oldest">Date (Oldest First)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="batchCompareList" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Compared result cards -->
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        let authMode = "login"; // 'login' or 'signup'
+        
         let currentPaperData = null;
         let loaderTimer = null;
+        let currentTab = 'citations';
         
+        // Lists of connected papers parsed from `/scrape` response
+        let citationsList = [];
+        let referencesList = [];
+        let similarList = [];
+        let localMatcherList = [];
+        let ieeeSearchList = [];
+        
+        // Cache of successfully scraped subpage papers
+        let scrapedSubpagesList = [];
+        
+        // Navigation trail history for recursive traversal
+        let navigationTrail = []; // Array of paper objects
+
         const loaderSteps = [
-            { text: "Spawning browser instance...", sub: "Setting up sandboxed Playwright session." },
+            { text: "Querying MongoDB Cache...", sub: "Verifying if metadata exists in local cache." },
+            { text: "Spawning browser engine...", sub: "Setting up sandboxed Playwright session." },
             { text: "Navigating to IEEE Xplore...", sub: "Making handshake with the servers." },
             { text: "Solving WAF verification...", sub: "Passing challenge.js verification checks." },
             { text: "Parsing document structure...", sub: "Parsing JSON configuration elements on the page." },
             { text: "Extracting paper content...", sub: "Compiling title, abstract, and keyword properties." }
         ];
 
-        function startLoaderProgress() {
+        const bulkLoaderSteps = [
+            { text: "Analyzing MongoDB Cache...", sub: "Bypassing scrapers for cached document references." },
+            { text: "Launching Playwright manager...", sub: "Initializing browser session for batch processing." },
+            { text: "Scraping connected papers...", sub: "Loading URLs and retrieving metadata definitions." },
+            { text: "Executing Hybrid AJAX fetches...", sub: "Bypassing page loads to fetch documents in 200ms." },
+            { text: "Waiting politeness delay...", sub: "Holding requests for 2.0s to respect server rate-limits." }
+        ];
+
+        // On Page Load: Check authentication
+        window.addEventListener("load", checkAuth);
+
+        async function checkAuth() {
+            try {
+                const res = await fetch("/auth-status");
+                const data = await res.json();
+                
+                const authPanel = document.getElementById("authPanel");
+                const userBadge = document.getElementById("userBadge");
+                const navigationBar = document.getElementById("navigationBar");
+                
+                if (data.authenticated) {
+                    authPanel.style.display = "none";
+                    navigationBar.style.display = "flex";
+                    userBadge.style.display = "flex";
+                    document.getElementById("userEmailLabel").textContent = data.email;
+                    
+                    // Default to workspace tab
+                    switchDashboardTab('workspace');
+                } else {
+                    authPanel.style.display = "block";
+                    navigationBar.style.display = "none";
+                    document.getElementById("dashboardPanel").style.display = "none";
+                    document.getElementById("historyPanel").style.display = "none";
+                    document.getElementById("ieeeSearchTabPanel").style.display = "none";
+                    userBadge.style.display = "none";
+                }
+            } catch (e) {
+                console.error("Auth check failed:", e);
+            }
+        }
+
+        function switchAuthTab(mode) {
+            authMode = mode;
+            document.getElementById("authTabLogin").className = mode === "login" ? "auth-tab-btn active" : "auth-tab-btn";
+            document.getElementById("authTabSignup").className = mode === "signup" ? "auth-tab-btn active" : "auth-tab-btn";
+            
+            document.getElementById("authSubmitText").textContent = mode === "login" ? "Sign In" : "Register";
+            document.getElementById("authError").style.display = "none";
+        }
+
+        async function handleAuth(event) {
+            event.preventDefault();
+            const email = document.getElementById("authEmail").value.trim();
+            const password = document.getElementById("authPassword").value;
+            const errorBox = document.getElementById("authError");
+            const errorMsg = document.getElementById("authErrorMessage");
+            const btn = document.getElementById("btnAuthSubmit");
+            
+            errorBox.style.display = "none";
+            btn.disabled = true;
+            
+            const endpoint = authMode === "login" ? "/login" : "/signup";
+            
+            try {
+                const res = await fetch(endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const result = await res.json();
+                if (res.ok && result.success) {
+                    await checkAuth();
+                } else {
+                    errorMsg.textContent = result.error || "An error occurred during authentication.";
+                    errorBox.style.display = "flex";
+                }
+            } catch (err) {
+                errorMsg.textContent = "Could not connect to the auth server.";
+                errorBox.style.display = "flex";
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function handleLogout() {
+            try {
+                await fetch("/logout", { method: "POST" });
+                await checkAuth();
+                
+                // Reset state
+                currentPaperData = null;
+                citationsList = [];
+                referencesList = [];
+                similarList = [];
+                scrapedSubpagesList = [];
+                standaloneSearchList = [];
+                navigationTrail = [];
+                
+                document.getElementById("similarSearchUrl").value = "";
+                document.getElementById("standaloneSearchResultsSection").style.display = "none";
+                document.getElementById("results").style.display = "none";
+                document.getElementById("subpagesSection").style.display = "none";
+            } catch (e) {
+                console.error("Logout failed:", e);
+            }
+        }
+
+        // Dashboard Tab Navigation Handler
+        async function switchDashboardTab(tabName) {
+            const workspaceBtn = document.getElementById("nav-btn-dashboard");
+            const historyBtn = document.getElementById("nav-btn-history");
+            const searchBtn = document.getElementById("nav-btn-ieee-search");
+            const batchCompareBtn = document.getElementById("nav-btn-batch-compare");
+            
+            const dashboardPanel = document.getElementById("dashboardPanel");
+            const historyPanel = document.getElementById("historyPanel");
+            const searchPanel = document.getElementById("ieeeSearchTabPanel");
+            const batchComparePanel = document.getElementById("batchComparePanel");
+            
+            workspaceBtn.classList.remove("active");
+            historyBtn.classList.remove("active");
+            searchBtn.classList.remove("active");
+            if (batchCompareBtn) batchCompareBtn.classList.remove("active");
+            
+            dashboardPanel.style.display = "none";
+            historyPanel.style.display = "none";
+            searchPanel.style.display = "none";
+            if (batchComparePanel) batchComparePanel.style.display = "none";
+            
+            if (tabName === 'workspace') {
+                workspaceBtn.classList.add("active");
+                dashboardPanel.style.display = "block";
+            } else if (tabName === 'history') {
+                historyBtn.classList.add("active");
+                historyPanel.style.display = "block";
+                await loadHistoryFromServer();
+            } else if (tabName === 'ieee-search-tab') {
+                searchBtn.classList.add("active");
+                searchPanel.style.display = "block";
+            } else if (tabName === 'batch-compare') {
+                if (batchCompareBtn) batchCompareBtn.classList.add("active");
+                if (batchComparePanel) batchComparePanel.style.display = "block";
+            }
+        }
+
+        async function loadHistoryFromServer() {
+            const container = document.getElementById("historyListContainer");
+            container.innerHTML = `<div style="padding: 3rem; text-align: center; color: var(--text-muted);">
+                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary);"></i>
+                <p>Loading your scrape history...</p>
+            </div>`;
+            
+            try {
+                const res = await fetch("/history");
+                const result = await res.json();
+                if (res.ok && result.success) {
+                    renderHistoryList(result.data);
+                } else {
+                    container.innerHTML = `<div style="padding: 3rem; text-align: center; color: #fca5a5;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>Error loading history: ${result.error || "Unknown error"}</p>
+                    </div>`;
+                }
+            } catch (e) {
+                container.innerHTML = `<div style="padding: 3rem; text-align: center; color: #fca5a5;">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>Could not connect to the history database.</p>
+                </div>`;
+            }
+        }
+
+        function renderHistoryList(papers) {
+            const container = document.getElementById("historyListContainer");
+            container.innerHTML = "";
+            
+            // Store loaded papers in a global window variable to avoid complex string escaping inside HTML parameters
+            window.scrapedHistoryPapers = papers;
+            
+            if (papers.length === 0) {
+                container.innerHTML = `<div style="padding: 3rem; text-align: center; color: var(--text-muted);">
+                    <i class="fa-solid fa-box-open" style="font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                    <p>Your scrape history is empty. Try scraping a paper in the workspace tab!</p>
+                </div>`;
+                return;
+            }
+            
+            papers.forEach((paper, idx) => {
+                const card = document.createElement("div");
+                card.className = "subpage-card";
+                
+                card.innerHTML = `
+                    <h3 class="subpage-title">${idx + 1}. ${paper.title}</h3>
+                    <div class="meta-badges" style="margin-bottom: 1rem;">
+                        <div class="badge"><i class="fa-solid fa-user-pen"></i><span>${paper.authors}</span></div>
+                        <div class="badge"><i class="fa-solid fa-calendar-days"></i><span>${paper.year}</span></div>
+                        <div class="badge"><i class="fa-solid fa-fingerprint"></i><span>DOI: ${paper.doi}</span></div>
+                        <span class="badge"><i class="fa-regular fa-clock"></i><span>Scraped: ${paper.scraped_at}</span></span>
+                    </div>
+                    
+                    <div class="subpage-actions" style="margin-top: 1rem;">
+                        <button class="btn-outline" onclick="deleteHistoryPaper('${paper.articleNumber}')" style="border-color: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 0.4rem 0.85rem; border-radius:0.5rem; font-size:0.8rem;">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>Delete</span>
+                        </button>
+                        <button class="btn-sub-explore" onclick="loadHistoryPaperByIndex(${idx})">
+                            <span>Load in Workspace</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function loadHistoryPaperByIndex(index) {
+            const paper = window.scrapedHistoryPapers[index];
+            if (!paper) return;
+            
+            // Reset navigation trail to just this paper
+            navigationTrail = [paper];
+            currentPaperData = paper;
+            
+            // Parse connections from paper document
+            citationsList = paper.connected.citations || [];
+            referencesList = paper.connected.references || [];
+            similarList = paper.connected.similar || [];
+            scrapedSubpagesList = []; // Reset subpages list
+            
+            // Populate url input
+            document.getElementById("paperUrl").value = paper.url;
+            
+            // Render results
+            renderResults(paper, true);
+            
+            // Hide subpages section initially
+            document.getElementById("subpagesSection").style.display = "none";
+            
+            // Switch view back to Dashboard/Workspace
+            switchDashboardTab('workspace');
+        }
+
+        function loadLocalMatchedPaperByIndex(index) {
+            const paper = window.localMatchedPapers[index];
+            if (!paper) return;
+            
+            // Reset navigation trail to just this paper
+            navigationTrail = [paper];
+            currentPaperData = paper;
+            
+            // Parse connections from paper document
+            citationsList = paper.connected.citations || [];
+            referencesList = paper.connected.references || [];
+            similarList = paper.connected.similar || [];
+            scrapedSubpagesList = []; // Reset subpages list
+            
+            // Populate url input
+            document.getElementById("paperUrl").value = paper.url;
+            
+            // Render results
+            renderResults(paper, true);
+            
+            // Hide subpages section initially
+            document.getElementById("subpagesSection").style.display = "none";
+        }
+
+        async function deleteHistoryPaper(artNum) {
+            if (!confirm("Are you sure you want to remove this paper from your cache history?")) return;
+            try {
+                const res = await fetch(`/history/delete/${artNum}`, { method: "DELETE" });
+                const result = await res.json();
+                if (res.ok && result.success) {
+                    await loadHistoryFromServer();
+                } else {
+                    alert("Delete failed: " + (result.error || "Unknown error"));
+                }
+            } catch (e) {
+                alert("Failed to connect to delete endpoint.");
+            }
+        }
+
+        function startLoaderProgress(isBulk = false, totalCount = 0) {
             let stepIndex = 0;
+            const steps = isBulk ? bulkLoaderSteps : loaderSteps;
+            
             const updateStep = () => {
-                const step = loaderSteps[stepIndex];
-                document.getElementById("loaderMainText").textContent = step.text;
+                const step = steps[stepIndex];
+                document.getElementById("loaderMainText").textContent = isBulk 
+                    ? `Scraping Batch (Progress: 0 / ${totalCount})`
+                    : step.text;
                 document.getElementById("loaderSubText").textContent = step.sub;
-                stepIndex = (stepIndex + 1) % loaderSteps.length;
+                stepIndex = (stepIndex + 1) % steps.length;
             };
             
             updateStep();
-            loaderTimer = setInterval(updateStep, 3000);
+            loaderTimer = setInterval(updateStep, 2500);
         }
 
         function stopLoaderProgress() {
@@ -610,21 +1818,26 @@
         }
 
         async function handleScrape(event) {
-            event.preventDefault();
-            const urlInput = document.getElementById("paperUrl").value.strip ? document.getElementById("paperUrl").value.strip() : document.getElementById("paperUrl").value;
-            
-            // UI States
+            if (event) event.preventDefault();
+            const urlInput = document.getElementById("paperUrl").value.trim();
+            await fetchPaperDetails(urlInput);
+        }
+
+        async function fetchPaperDetails(url, isRecursive = false) {
             const errorBox = document.getElementById("errorBox");
             const loader = document.getElementById("loader");
             const results = document.getElementById("results");
+            const subpagesSection = document.getElementById("subpagesSection");
             const submitBtn = document.getElementById("submitBtn");
             
             errorBox.style.display = "none";
             results.style.display = "none";
+            subpagesSection.style.display = "none";
             loader.style.display = "flex";
             submitBtn.disabled = true;
             
-            startLoaderProgress();
+            startLoaderProgress(false);
+            const startTime = performance.now();
             
             try {
                 const response = await fetch("/scrape", {
@@ -632,19 +1845,41 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ url: urlInput })
+                    body: JSON.stringify({ url: url })
                 });
                 
                 const result = await response.json();
                 
                 if (response.ok && result.success) {
+                    const endTime = performance.now();
+                    const elapsedSeconds = ((endTime - startTime) / 1000).toFixed(2);
                     currentPaperData = result.data;
-                    renderResults(result.data);
+                    scrapedSubpagesList = []; // Reset subpages cache
+                    
+                    // Parse connections
+                    citationsList = currentPaperData.connected.citations || [];
+                    referencesList = currentPaperData.connected.references || [];
+                    similarList = currentPaperData.connected.similar || [];
+                    
+                    // Update Navigation Trail (Breadcrumbs)
+                    if (!isRecursive) {
+                        navigationTrail = [currentPaperData];
+                    } else {
+                        // Check if paper already exists in trail to truncate back to it (prevent loops)
+                        const existingIdx = navigationTrail.findIndex(p => p.articleNumber === currentPaperData.articleNumber);
+                        if (existingIdx !== -1) {
+                            navigationTrail = navigationTrail.slice(0, existingIdx + 1);
+                        } else {
+                            navigationTrail.push(currentPaperData);
+                        }
+                    }
+                    
+                    renderResults(result.data, !!result.cached, elapsedSeconds);
                 } else {
                     showError(result.error || "An error occurred while scraping the paper details.");
                 }
             } catch (err) {
-                showError("Could not connect to the local scraper server. Make sure the Flask app is running.");
+                showError("Could not connect to the scraper server.");
             } finally {
                 stopLoaderProgress();
                 loader.style.display = "none";
@@ -657,13 +1892,28 @@
             document.getElementById("errorBox").style.display = "flex";
         }
 
-        function renderResults(paper) {
+        function renderResults(paper, isCached = false, elapsedSeconds = null) {
             document.getElementById("resTitle").textContent = paper.title;
             document.getElementById("resAuthors").textContent = paper.authors;
             document.getElementById("resYear").textContent = paper.year;
             document.getElementById("resDoi").textContent = paper.doi;
             document.getElementById("resUrl").href = paper.url;
             document.getElementById("resAbstract").textContent = paper.abstract;
+            
+            // Cache badge indicator
+            const cacheBadge = document.getElementById("cacheBadge");
+            cacheBadge.style.display = isCached ? "inline-flex" : "none";
+            
+            // Processed time badge
+            const timeBadge = document.getElementById("timeBadge");
+            if (timeBadge) {
+                if (elapsedSeconds) {
+                    timeBadge.style.display = "inline-flex";
+                    timeBadge.querySelector("span").textContent = `Processed in ${elapsedSeconds}s`;
+                } else {
+                    timeBadge.style.display = "none";
+                }
+            }
             
             // Render keywords
             const keywordsContainer = document.getElementById("resKeywordsContainer");
@@ -697,25 +1947,724 @@
                 keywordsContainer.innerHTML = `<em style="color: var(--text-muted);">No keywords available for this paper.</em>`;
             }
             
+            // Render Breadcrumbs
+            renderBreadcrumbs();
+            
+            // Update tab counts
+            document.getElementById("tab-citations").textContent = `Citations (${citationsList.length})`;
+            document.getElementById("tab-references").textContent = `References (${referencesList.length})`;
+            document.getElementById("tab-similar").textContent = `Similar Papers (${similarList.length})`;
+            document.getElementById("tab-local-matcher").textContent = `Database Matches (0)`;
+            localMatcherList = [];
+            
+            // Fetch similarity recommendations from your local scraped database matches
+            fetch(`/recommend-local/${paper.articleNumber}`)
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        localMatcherList = result.data || [];
+                        document.getElementById("tab-local-matcher").textContent = `Database Matches (${localMatcherList.length})`;
+                        if (currentTab === 'local-matcher') {
+                            renderConnectedList();
+                        }
+                    }
+                }).catch(err => console.error("Database similarity matching failed:", err));
+            
+            // Render active tab list (default: citations)
+            currentTab = 'citations';
+            document.getElementById("tab-citations").className = "tab-btn active";
+            document.getElementById("tab-references").className = "tab-btn";
+            document.getElementById("tab-similar").className = "tab-btn";
+            document.getElementById("tab-local-matcher").className = "tab-btn";
+            
+            renderConnectedList();
+            updateSelectedCounter();
+            
             // Show result panel
             document.getElementById("results").style.display = "block";
         }
 
-        function getPaperMarkdownText(paper) {
+        function renderBreadcrumbs() {
+            const container = document.getElementById("breadcrumbsPanel");
+            container.innerHTML = `<span class="breadcrumb-item" onclick="resetNavigation()">Home</span>`;
+            container.style.display = navigationTrail.length > 0 ? "flex" : "none";
+            
+            navigationTrail.forEach((paper, idx) => {
+                container.innerHTML += `
+                    <span class="breadcrumb-separator"><i class="fa-solid fa-chevron-right"></i></span>
+                    <span class="breadcrumb-item ${idx === navigationTrail.length - 1 ? 'active' : ''}" 
+                          onclick="goToBreadcrumb(${idx})">
+                        ${paper.title.substring(0, 30)}${paper.title.length > 30 ? '...' : ''}
+                    </span>
+                `;
+            });
+        }
+
+        function goToBreadcrumb(index) {
+            if (index === navigationTrail.length - 1) return;
+            const targetPaper = navigationTrail[index];
+            document.getElementById("paperUrl").value = targetPaper.url;
+            fetchPaperDetails(targetPaper.url, true);
+        }
+
+        function resetNavigation() {
+            navigationTrail = [];
+            currentPaperData = null;
+            document.getElementById("paperUrl").value = "";
+            document.getElementById("results").style.display = "none";
+            document.getElementById("subpagesSection").style.display = "none";
+        }
+
+        function exploreConnectedPaper(url) {
+            document.getElementById("paperUrl").value = url;
+            fetchPaperDetails(url, true);
+        }
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+            
+            // Toggle active classes
+            document.getElementById("tab-citations").className = tabName === 'citations' ? "tab-btn active" : "tab-btn";
+            document.getElementById("tab-references").className = tabName === 'references' ? "tab-btn active" : "tab-btn";
+            document.getElementById("tab-similar").className = tabName === 'similar' ? "tab-btn active" : "tab-btn";
+            document.getElementById("tab-local-matcher").className = tabName === 'local-matcher' ? "tab-btn active" : "tab-btn";
+            
+            // Show or hide quick select and bulk actions if we're looking at database recommendations
+            const quickSelect = document.querySelector(".quick-select-row");
+            const bulkBar = document.querySelector(".bulk-action-bar");
+            if (tabName === 'local-matcher') {
+                if (quickSelect) quickSelect.style.display = "none";
+                if (bulkBar) bulkBar.style.display = "none";
+            } else {
+                if (quickSelect) quickSelect.style.display = "flex";
+                if (bulkBar) bulkBar.style.display = "flex";
+            }
+            
+            renderConnectedList();
+        }
+
+        function getActiveList() {
+            if (currentTab === 'citations') return citationsList;
+            if (currentTab === 'references') return referencesList;
+            if (currentTab === 'similar') return similarList;
+            if (currentTab === 'ieee-search') return ieeeSearchList;
+            return [];
+        }
+
+        function renderConnectedList() {
+            const listContainer = document.getElementById("connectedList");
+            listContainer.innerHTML = "";
+            
+            if (currentTab === 'local-matcher') {
+                window.localMatchedPapers = localMatcherList.map(x => x.paper);
+                if (localMatcherList.length === 0) {
+                    listContainer.innerHTML = `<div style="padding: 2.5rem; text-align: center; color: var(--text-muted);">
+                        <i class="fa-solid fa-face-meh" style="font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.5;"></i>
+                        <p>No other papers in your database share keywords or content matches yet. Try scraping more papers!</p>
+                    </div>`;
+                    return;
+                }
+                
+                localMatcherList.forEach((match, idx) => {
+                    const paper = match.paper;
+                    const itemDiv = document.createElement("div");
+                    itemDiv.className = "connected-item";
+                    itemDiv.style.alignItems = "center";
+                    
+                    // Match score column
+                    const scoreWrapper = document.createElement("div");
+                    scoreWrapper.style.minWidth = "70px";
+                    scoreWrapper.innerHTML = `<div class="badge" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #c084fc; font-weight: 700; width: 100%; justify-content: center;">${match.score}%</div>`;
+                    itemDiv.appendChild(scoreWrapper);
+                    
+                    // Info column
+                    const infoDiv = document.createElement("div");
+                    infoDiv.className = "connected-info";
+                    infoDiv.style.marginLeft = "0.5rem";
+                    
+                    const titleDiv = document.createElement("div");
+                    titleDiv.className = "connected-title";
+                    titleDiv.textContent = paper.title;
+                    infoDiv.appendChild(titleDiv);
+                    
+                    const metaDiv = document.createElement("div");
+                    metaDiv.className = "connected-meta";
+                    
+                    if (paper.authors) {
+                        metaDiv.innerHTML += `<span><i class="fa-solid fa-user-pen"></i> ${paper.authors}</span>`;
+                    }
+                    if (paper.year) {
+                        metaDiv.innerHTML += `<span><i class="fa-solid fa-calendar-days"></i> ${paper.year}</span>`;
+                    }
+                    if (match.shared_keywords && match.shared_keywords.length > 0) {
+                        const count = match.shared_keywords.length;
+                        metaDiv.innerHTML += `<span style="color: #a5b4fc;"><i class="fa-solid fa-tags"></i> ${count} Shared Keywords: ${match.shared_keywords.slice(0, 5).join(', ')}${match.shared_keywords.length > 5 ? '...' : ''}</span>`;
+                    }
+                    
+                    infoDiv.appendChild(metaDiv);
+                    itemDiv.appendChild(infoDiv);
+                    
+                    // Action column
+                    const actionDiv = document.createElement("div");
+                    actionDiv.style.marginLeft = "auto";
+                    actionDiv.innerHTML = `
+                        <button class="btn-sub-explore" onclick="loadLocalMatchedPaperByIndex(${idx})" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">
+                            <span>Load</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    `;
+                    itemDiv.appendChild(actionDiv);
+                    
+                    listContainer.appendChild(itemDiv);
+                });
+                return;
+            }
+            
+            const list = getActiveList();
+            
+            if (list.length === 0) {
+                listContainer.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No connected papers found in this category.</div>`;
+                return;
+            }
+            
+            list.forEach((item, idx) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "connected-item";
+                
+                // Checkbox column
+                const checkboxWrapper = document.createElement("div");
+                checkboxWrapper.className = "connected-checkbox-wrapper";
+                
+                if (item.scrapable) {
+                    const label = document.createElement("label");
+                    label.className = "checkbox-container";
+                    
+                    const input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.checked = !!item.selected;
+                    input.dataset.index = idx;
+                    input.onchange = (e) => {
+                        item.selected = e.target.checked;
+                        updateSelectedCounter();
+                    };
+                    
+                    const checkmark = document.createElement("span");
+                    checkmark.className = "checkmark";
+                    
+                    label.appendChild(input);
+                    label.appendChild(checkmark);
+                    checkboxWrapper.appendChild(label);
+                } else {
+                    const badge = document.createElement("span");
+                    badge.className = "connected-badge-unscrapable";
+                    badge.textContent = "External";
+                    badge.title = "This paper is not hosted on IEEE Xplore and cannot be scraped.";
+                    checkboxWrapper.appendChild(badge);
+                }
+                
+                // Info column
+                const infoDiv = document.createElement("div");
+                infoDiv.className = "connected-info";
+                
+                const titleDiv = document.createElement("div");
+                titleDiv.className = "connected-title";
+                titleDiv.textContent = item.title;
+                infoDiv.appendChild(titleDiv);
+                
+                const metaDiv = document.createElement("div");
+                metaDiv.className = "connected-meta";
+                
+                if (item.authors) {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-user-pen"></i> ${item.authors}</span>`;
+                }
+                if (item.year && item.year !== 'Unknown Year') {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-calendar-days"></i> ${item.year}</span>`;
+                }
+                if (item.articleNumber) {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-fingerprint"></i> ID: ${item.articleNumber}</span>`;
+                }
+                
+                infoDiv.appendChild(metaDiv);
+                
+                itemDiv.appendChild(checkboxWrapper);
+                itemDiv.appendChild(infoDiv);
+                listContainer.appendChild(itemDiv);
+            });
+        }
+
+        function updateSelectedCounter() {
+            let totalSelected = 0;
+            [citationsList, referencesList, similarList, ieeeSearchList].forEach(list => {
+                list.forEach(item => {
+                    if (item.selected && item.scrapable) totalSelected++;
+                });
+            });
+            
+            document.getElementById("selectedCount").textContent = totalSelected;
+            document.getElementById("btnBulkScrape").disabled = totalSelected === 0;
+        }
+
+        function selectAllConnected(select) {
+            const list = getActiveList();
+            list.forEach(item => {
+                if (item.scrapable) {
+                    item.selected = select;
+                }
+            });
+            renderConnectedList();
+            updateSelectedCounter();
+        }
+
+        function selectQuick(count) {
+            const list = getActiveList();
+            let selectedCount = 0;
+            list.forEach(item => {
+                if (item.scrapable) {
+                    if (selectedCount < count) {
+                        item.selected = true;
+                        selectedCount++;
+                    } else {
+                        item.selected = false;
+                    }
+                }
+            });
+            renderConnectedList();
+            updateSelectedCounter();
+        }
+
+        async function executeBulkScrape() {
+            // Get selected URLs
+            const selectedUrls = [];
+            [citationsList, referencesList, similarList, ieeeSearchList].forEach(list => {
+                list.forEach(item => {
+                    if (item.selected && item.scrapable && item.url) {
+                        selectedUrls.push(item.url);
+                    }
+                });
+            });
+            
+            if (selectedUrls.length === 0) return;
+            
+            const errorBox = document.getElementById("errorBox");
+            const loader = document.getElementById("loader");
+            const results = document.getElementById("results");
+            const subpagesSection = document.getElementById("subpagesSection");
+            
+            errorBox.style.display = "none";
+            results.style.display = "none";
+            subpagesSection.style.display = "none";
+            loader.style.display = "flex";
+            
+            startLoaderProgress(true, selectedUrls.length);
+            const startTime = performance.now();
+            
+            scrapedSubpagesList = [];
+            
+            for (let i = 0; i < selectedUrls.length; i++) {
+                const url = selectedUrls[i];
+                document.getElementById("loaderMainText").textContent = `Scraping Batch (Progress: ${i} / ${selectedUrls.length})`;
+                const safeUrl = url.length > 50 ? url.substring(0, 47) + "..." : url;
+                document.getElementById("loaderSubText").textContent = `Processing paper ${i + 1} of ${selectedUrls.length}:\n${safeUrl}\nResolving WAF challenge...`;
+                
+                try {
+                    const response = await fetch("/scrape", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ url: url })
+                    });
+                    
+                    const result = await response.json();
+                    if (response.ok && result.success) {
+                        scrapedSubpagesList.push(result.data);
+                    } else {
+                        console.error(`Failed to scrape ${url}:`, result.error);
+                    }
+                } catch (err) {
+                    console.error(`Network error scraping ${url}:`, err);
+                }
+            }
+            
+            stopLoaderProgress();
+            loader.style.display = "none";
+            
+            if (scrapedSubpagesList.length > 0) {
+                const endTime = performance.now();
+                const elapsedSeconds = ((endTime - startTime) / 1000).toFixed(2);
+                renderSubpages(elapsedSeconds);
+            } else {
+                showError("Failed to scrape any of the selected papers.");
+                results.style.display = "block";
+            }
+        }
+
+        function renderSubpages(elapsedSeconds = null) {
+            const listDiv = document.getElementById("subpagesList");
+            listDiv.innerHTML = "";
+            
+            // Render bulk time label in the subpages section header
+            const header = document.querySelector(".subpages-header");
+            if (header) {
+                if (elapsedSeconds) {
+                    header.innerHTML = `<i class="fa-solid fa-file-invoice" style="color: var(--primary);"></i>
+                    <span>Scraped Subpages Metadata <span style="font-size: 0.9rem; font-weight: 500; color: var(--text-muted); margin-left: 0.5rem;">(Processed in ${elapsedSeconds}s)</span></span>`;
+                } else {
+                    header.innerHTML = `<i class="fa-solid fa-file-invoice" style="color: var(--primary);"></i>
+                    <span>Scraped Subpages Metadata</span>`;
+                }
+            }
+            
+            if (scrapedSubpagesList.length === 0) {
+                listDiv.innerHTML = `<div class="subpage-card" style="text-align:center; color: var(--text-muted);">No subpages were successfully scraped.</div>`;
+            } else {
+                scrapedSubpagesList.forEach((paper, idx) => {
+                    const card = document.createElement("div");
+                    card.className = "subpage-card collapsed";
+                    card.id = `subpage-card-${idx}`;
+                    
+                    const authorSnippet = paper.authors.split(',')[0] + (paper.authors.includes(',') ? ' et al.' : '');
+                    
+                    card.innerHTML = `
+                        <div class="subpage-card-header" onclick="toggleSubpageCard(${idx})">
+                            <div class="subpage-card-header-info">
+                                <h3 class="subpage-title" style="margin-bottom: 0.4rem; font-size: 1.1rem; line-height: 1.4;">
+                                    <span style="color: var(--accent); font-weight:800; margin-right:0.4rem;">#${idx + 1}</span>
+                                    ${paper.title}
+                                </h3>
+                                <div class="meta-badges" style="margin-bottom: 0; gap: 0.5rem;">
+                                    <div class="badge" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03);"><i class="fa-solid fa-user-pen"></i><span>${authorSnippet}</span></div>
+                                    <div class="badge" style="padding: 0.25rem 0.6rem; font-size: 0.75rem; background: rgba(255, 255, 255, 0.03);"><i class="fa-solid fa-calendar-days"></i><span>${paper.year}</span></div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-down subpage-card-toggle" style="margin-left: 1rem;"></i>
+                        </div>
+                        
+                        <div class="subpage-card-body">
+                            <div class="meta-badges" style="margin-bottom: 1.25rem;">
+                                <div class="badge"><i class="fa-solid fa-user-pen"></i><span>${paper.authors}</span></div>
+                                <div class="badge"><i class="fa-solid fa-calendar-days"></i><span>${paper.year}</span></div>
+                                <div class="badge"><i class="fa-solid fa-fingerprint"></i><span>DOI: ${paper.doi}</span></div>
+                                <a href="${paper.url}" target="_blank" class="badge" style="text-decoration:none;"><i class="fa-solid fa-up-right-from-square"></i><span>Open in IEEE</span></a>
+                            </div>
+                            
+                            <div class="section-title" style="font-size: 0.95rem;"><i class="fa-solid fa-align-left" style="color: var(--primary);"></i><span>Abstract</span></div>
+                            <div class="section-content" style="font-size: 0.9rem; margin-bottom: 1.25rem; padding: 1rem;">${paper.abstract}</div>
+                            
+                            <div class="section-title" style="font-size: 0.95rem;"><i class="fa-solid fa-tags" style="color: var(--accent);"></i><span>Keywords</span></div>
+                            <div class="section-content" style="font-size: 0.9rem; margin-bottom: 0; padding: 1rem;" id="sub-kwd-${idx}"></div>
+                            
+                            <div class="subpage-actions">
+                                <button class="btn-sub-explore" onclick="exploreConnectedPaper('${paper.url}')">
+                                    <span>Explore Connections</span>
+                                    <i class="fa-solid fa-network-wired"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    listDiv.appendChild(card);
+                    
+                    // Render subpage keywords
+                    const kwdContainer = document.getElementById(`sub-kwd-${idx}`);
+                    const keys = Object.keys(paper.keywords);
+                    if (keys.length > 0) {
+                        keys.forEach(kType => {
+                            const group = document.createElement("div");
+                            group.className = "keyword-group";
+                            group.innerHTML = `<div class="keyword-type" style="font-size: 0.75rem;">${kType}</div>`;
+                            const pills = document.createElement("div");
+                            pills.className = "keyword-pills";
+                            paper.keywords[kType].forEach(kwd => {
+                                pills.innerHTML += `<span class="pill" style="font-size:0.75rem; padding:0.25rem 0.5rem;">${kwd}</span>`;
+                            });
+                            group.appendChild(pills);
+                            kwdContainer.appendChild(group);
+                        });
+                    } else {
+                        kwdContainer.innerHTML = `<em style="color: var(--text-muted);">No keywords available.</em>`;
+                    }
+                });
+            }
+            
+            // Display containers
+            document.getElementById("results").style.display = "block";
+            document.getElementById("subpagesSection").style.display = "block";
+            
+            // Scroll to subpages header
+            document.getElementById("subpagesSection").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleSubpageCard(index) {
+            const card = document.getElementById(`subpage-card-${index}`);
+            if (card) {
+                card.classList.toggle("collapsed");
+            }
+        }
+
+        // Standalone IEEE Similarity Search Engine Actions
+        let standaloneSearchList = [];
+
+        async function performStandaloneSimilarSearch() {
+            const urlInput = document.getElementById("similarSearchUrl").value.trim();
+            if (!urlInput) return;
+            
+            const loader = document.getElementById("standaloneSearchLoader");
+            const resultsSec = document.getElementById("standaloneSearchResultsSection");
+            const btn = document.getElementById("btnStandaloneSearch");
+            
+            loader.style.display = "flex";
+            resultsSec.style.display = "none";
+            btn.disabled = true;
+            
+            document.getElementById("standaloneLoaderText").textContent = "Analyzing input document...";
+            document.getElementById("standaloneLoaderSub").textContent = "Checking MongoDB cache or scraping keywords...";
+            
+            const startTime = performance.now();
+            
+            try {
+                const scrapeRes = await fetch("/scrape", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: urlInput })
+                });
+                const scrapeResult = await scrapeRes.json();
+                if (!scrapeRes.ok || !scrapeResult.success) {
+                    throw new Error(scrapeResult.error || "Failed to resolve target paper metadata.");
+                }
+                
+                const artNum = scrapeResult.data.articleNumber;
+                
+                document.getElementById("standaloneLoaderText").textContent = "Querying live IEEE Xplore database...";
+                document.getElementById("standaloneLoaderSub").textContent = "Generating Boolean query text from keywords...";
+                
+                const searchRes = await fetch(`/search-similar-ieee/${artNum}`);
+                const searchResult = await searchRes.json();
+                if (!searchRes.ok || !searchResult.success) {
+                    throw new Error(searchResult.error || "Failed to load live recommendations.");
+                }
+                
+                const endTime = performance.now();
+                const elapsed = ((endTime - startTime) / 1000).toFixed(2);
+                
+                standaloneSearchList = searchResult.data || [];
+                
+                sortStandaloneSearchList();
+                renderStandaloneList();
+                updateStandaloneSelectedCounter();
+                
+                document.getElementById("standaloneTimeBadge").textContent = `Processed in ${elapsed}s`;
+                resultsSec.style.display = "block";
+            } catch (err) {
+                alert(err.message || "An error occurred during search.");
+            } finally {
+                loader.style.display = "none";
+                btn.disabled = false;
+            }
+        }
+
+        function sortStandaloneSearchList() {
+            const sortBy = document.getElementById("standaloneSortSelect").value;
+            
+            const getYearVal = (yearStr) => {
+                if (!yearStr) return 0;
+                const match = yearStr.toString().match(/\b\d{4}\b/);
+                return match ? parseInt(match[0]) : 0;
+            };
+            
+            if (sortBy === 'similarity') {
+                standaloneSearchList.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+            } else if (sortBy === 'date-newest') {
+                standaloneSearchList.sort((a, b) => getYearVal(b.year) - getYearVal(a.year));
+            } else if (sortBy === 'date-oldest') {
+                standaloneSearchList.sort((a, b) => getYearVal(a.year) - getYearVal(b.year));
+            }
+        }
+        
+        function handleStandaloneSortChange() {
+            sortStandaloneSearchList();
+            renderStandaloneList();
+        }
+
+        function renderStandaloneList() {
+            const container = document.getElementById("standaloneSearchList");
+            container.innerHTML = "";
+            
+            if (standaloneSearchList.length === 0) {
+                container.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No similar papers found on IEEE Xplore.</div>`;
+                return;
+            }
+            
+            standaloneSearchList.forEach((item, idx) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "connected-item";
+                
+                const checkboxWrapper = document.createElement("div");
+                checkboxWrapper.className = "connected-checkbox-wrapper";
+                
+                if (item.scrapable) {
+                    const label = document.createElement("label");
+                    label.className = "checkbox-container";
+                    
+                    const input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.checked = !!item.selected;
+                    input.onchange = (e) => {
+                        item.selected = e.target.checked;
+                        updateStandaloneSelectedCounter();
+                    };
+                    
+                    const checkmark = document.createElement("span");
+                    checkmark.className = "checkmark";
+                    
+                    label.appendChild(input);
+                    label.appendChild(checkmark);
+                    checkboxWrapper.appendChild(label);
+                } else {
+                    const badge = document.createElement("span");
+                    badge.className = "connected-badge-unscrapable";
+                    badge.textContent = "External";
+                    checkboxWrapper.appendChild(badge);
+                }
+                
+                const infoDiv = document.createElement("div");
+                infoDiv.className = "connected-info";
+                
+                const titleDiv = document.createElement("div");
+                titleDiv.className = "connected-title";
+                titleDiv.textContent = item.title;
+                infoDiv.appendChild(titleDiv);
+                
+                const metaDiv = document.createElement("div");
+                metaDiv.className = "connected-meta";
+                if (item.authors) {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-user-pen"></i> ${item.authors}</span>`;
+                }
+                if (item.year && item.year !== 'Unknown Year') {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-calendar-days"></i> ${item.year}</span>`;
+                }
+                if (item.articleNumber) {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-fingerprint"></i> ID: ${item.articleNumber}</span>`;
+                }
+                if (item.sharedTerms && item.sharedTerms.length > 0) {
+                    metaDiv.innerHTML += `<span style="color: #a5b4fc;"><i class="fa-solid fa-tags"></i> Shared: ${item.sharedTerms.slice(0, 5).join(', ')}${item.sharedTerms.length > 5 ? '...' : ''}</span>`;
+                }
+                infoDiv.appendChild(metaDiv);
+                
+                itemDiv.appendChild(checkboxWrapper);
+                
+                if (item.matchScore !== undefined) {
+                    const scoreWrapper = document.createElement("div");
+                    scoreWrapper.style.minWidth = "65px";
+                    scoreWrapper.style.marginLeft = "0.5rem";
+                    scoreWrapper.innerHTML = `<div class="badge" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #c084fc; font-weight: 700; width: 100%; justify-content: center; font-size: 0.75rem; padding: 0.25rem 0.5rem;">${item.matchScore}%</div>`;
+                    itemDiv.appendChild(scoreWrapper);
+                }
+                
+                itemDiv.appendChild(infoDiv);
+                container.appendChild(itemDiv);
+            });
+        }
+
+        function updateStandaloneSelectedCounter() {
+            let count = 0;
+            standaloneSearchList.forEach(item => {
+                if (item.selected && item.scrapable) count++;
+            });
+            document.getElementById("standaloneSelectedCount").textContent = count;
+            document.getElementById("btnStandaloneBulkScrape").disabled = count === 0;
+        }
+
+        function selectStandaloneQuick(count) {
+            let selectedCount = 0;
+            standaloneSearchList.forEach(item => {
+                if (item.scrapable) {
+                    if (selectedCount < count) {
+                        item.selected = true;
+                        selectedCount++;
+                    } else {
+                        item.selected = false;
+                    }
+                }
+            });
+            renderStandaloneList();
+            updateStandaloneSelectedCounter();
+        }
+
+        function selectStandaloneAll(select) {
+            standaloneSearchList.forEach(item => {
+                if (item.scrapable) item.selected = select;
+            });
+            renderStandaloneList();
+            updateStandaloneSelectedCounter();
+        }
+
+        async function executeStandaloneBulkScrape() {
+            const selectedUrls = [];
+            standaloneSearchList.forEach(item => {
+                if (item.selected && item.scrapable && item.url) {
+                    selectedUrls.push(item.url);
+                }
+            });
+            
+            if (selectedUrls.length === 0) return;
+            
+            const loader = document.getElementById("standaloneSearchLoader");
+            const resultsSec = document.getElementById("standaloneSearchResultsSection");
+            
+            loader.style.display = "flex";
+            resultsSec.style.display = "none";
+            
+            document.getElementById("standaloneLoaderText").textContent = `Scraping Batch (0 / ${selectedUrls.length})`;
+            document.getElementById("standaloneLoaderSub").textContent = "Resolving WAF verification challenges...";
+            
+            const startTime = performance.now();
+            
+            try {
+                const response = await fetch("/scrape-bulk", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ urls: selectedUrls, delay: 1.5 })
+                });
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    const endTime = performance.now();
+                    const elapsed = ((endTime - startTime) / 1000).toFixed(2);
+                    
+                    scrapedSubpagesList = result.data || [];
+                    
+                    document.getElementById("similarSearchUrl").value = "";
+                    standaloneSearchList = [];
+                    
+                    switchDashboardTab('workspace');
+                    renderSubpages(elapsed);
+                } else {
+                    alert(result.error || "An error occurred during bulk scraping.");
+                    resultsSec.style.display = "block";
+                }
+            } catch (err) {
+                alert("Could not connect to the scraper server.");
+                resultsSec.style.display = "block";
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        // Single Paper Action Handlers
+        function getSingleMarkdown() {
+            if (!currentPaperData) return "";
             let md = `# IEEE Xplore Paper Metadata\n\n`;
-            md += `## ${paper.title}\n`;
-            md += `- **URL**: ${paper.url}\n`;
-            md += `- **Authors**: ${paper.authors}\n`;
-            md += `- **Publication Year**: ${paper.year}\n`;
-            md += `- **DOI**: ${paper.doi}\n\n`;
-            md += `### Abstract\n${paper.abstract}\n\n`;
+            md += `## ${currentPaperData.title}\n`;
+            md += `- **URL**: ${currentPaperData.url}\n`;
+            md += `- **Authors**: ${currentPaperData.authors}\n`;
+            md += `- **Publication Year**: ${currentPaperData.year}\n`;
+            md += `- **DOI**: ${currentPaperData.doi}\n\n`;
+            md += `### Abstract\n${currentPaperData.abstract}\n\n`;
             md += `### Keywords\n`;
             
-            const keys = Object.keys(paper.keywords);
+            const keys = Object.keys(currentPaperData.keywords);
             if (keys.length > 0) {
                 keys.forEach(kType => {
-                    const keywordsStr = paper.keywords[kType].join(", ");
-                    md += `- **${kType}**: ${keywordsStr}\n`;
+                    md += `- **${kType}**: ${currentPaperData.keywords[kType].join(", ")}\n`;
                 });
             } else {
                 md += `*No keywords available.*\n`;
@@ -723,67 +2672,456 @@
             return md;
         }
 
-        async function copyMarkdown() {
-            if (!currentPaperData) return;
-            const mdText = getPaperMarkdownText(currentPaperData);
-            
+        async function copyMarkdownSingle() {
+            const mdText = getSingleMarkdown();
+            if (!mdText) return;
             try {
                 await navigator.clipboard.writeText(mdText);
                 const copyBtn = document.getElementById("copyBtn");
                 const oldContent = copyBtn.innerHTML;
-                
                 copyBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>Copied!</span>`;
                 copyBtn.classList.add("active-success");
-                
                 setTimeout(() => {
                     copyBtn.innerHTML = oldContent;
                     copyBtn.classList.remove("active-success");
                 }, 2000);
             } catch (err) {
-                alert("Failed to copy to clipboard.");
+                alert("Failed to copy clipboard.");
             }
         }
 
-        async function downloadMarkdownFile() {
+        async function downloadMarkdownSingle() {
             if (!currentPaperData) return;
-            
             try {
                 const response = await fetch("/download/markdown", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ paper: currentPaperData })
                 });
-                
                 if (response.ok) {
                     const blob = await response.blob();
-                    
-                    // Create download link
-                    const disposition = response.headers.get('content-disposition');
-                    let filename = "paper_metadata.md";
-                    if (disposition && disposition.indexOf('attachment') !== -1) {
-                        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        const matches = filenameRegex.exec(disposition);
-                        if (matches != null && matches[1]) { 
-                            filename = matches[1].replace(/['"]/g, '');
-                        }
-                    }
-                    
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement("a");
                     a.href = url;
-                    a.download = filename;
+                    const safeTitle = currentPaperData.title.replace(/[^a-zA-Z0-9]/g, "_").substring(0, 30);
+                    a.download = `metadata_${safeTitle}.md`;
                     document.body.appendChild(a);
                     a.click();
                     a.remove();
-                    window.URL.revokeObjectURL(url);
-                } else {
-                    alert("Failed to download file.");
                 }
-            } catch (err) {
-                alert("Error downloading file: " + err);
+            } catch (e) {
+                alert("Download failed: " + e);
             }
+        }
+
+        // Combined Exporters (Original + Subpages)
+        function getCombinedMarkdownText() {
+            if (!currentPaperData) return "";
+            
+            let md = `# Paper Scraper - Combined Metadata\n\n`;
+            md += `*Generated on: ${new Date().toLocaleString()}*\n\n`;
+            
+            // 1. Original Paper
+            md += `---\n\n`;
+            md += `## 1. ${currentPaperData.title} (Original)\n`;
+            md += `- **URL**: ${currentPaperData.url}\n`;
+            md += `- **Authors**: ${currentPaperData.authors}\n`;
+            md += `- **Publication Year**: ${currentPaperData.year}\n`;
+            md += `- **DOI**: ${currentPaperData.doi}\n\n`;
+            md += `### Abstract\n${currentPaperData.abstract}\n\n`;
+            md += `### Keywords\n`;
+            
+            let keys = Object.keys(currentPaperData.keywords);
+            if (keys.length > 0) {
+                keys.forEach(kType => {
+                    md += `- **${kType}**: ${currentPaperData.keywords[kType].join(", ")}\n`;
+                });
+            } else {
+                md += `*No keywords available.*\n`;
+            }
+            md += "\n";
+            
+            // 2. Subpages
+            scrapedSubpagesList.forEach((paper, idx) => {
+                md += `---\n\n`;
+                md += `## ${idx + 2}. ${paper.title}\n`;
+                md += `- **URL**: ${paper.url}\n`;
+                md += `- **Authors**: ${paper.authors}\n`;
+                md += `- **Publication Year**: ${paper.year}\n`;
+                md += `- **DOI**: ${paper.doi}\n\n`;
+                md += `### Abstract\n${paper.abstract}\n\n`;
+                md += `### Keywords\n`;
+                
+                keys = Object.keys(paper.keywords);
+                if (keys.length > 0) {
+                    keys.forEach(kType => {
+                        md += `- **${kType}**: ${paper.keywords[kType].join(", ")}\n`;
+                    });
+                } else {
+                    md += `*No keywords available.*\n`;
+                }
+                md += "\n";
+            });
+            
+            md += `---\n`;
+            return md;
+        }
+
+        async function copyMarkdownCombined() {
+            const mdText = getCombinedMarkdownText();
+            if (!mdText) return;
+            try {
+                await navigator.clipboard.writeText(mdText);
+                const btn = document.getElementById("copyCombinedBtn");
+                const oldText = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>Copied Combined!</span>`;
+                btn.classList.add("active-success");
+                setTimeout(() => {
+                    btn.innerHTML = oldText;
+                    btn.classList.remove("active-success");
+                }, 2000);
+            } catch (e) {
+                alert("Copy failed.");
+            }
+        }
+
+        async function downloadCombinedMarkdown() {
+            if (!currentPaperData) return;
+            const allPapers = [currentPaperData, ...scrapedSubpagesList];
+            
+            try {
+                const response = await fetch("/download/combined", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ papers: allPapers, format: "markdown" })
+                });
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "combined_papers_metadata.md";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                }
+            } catch (e) {
+                alert("Download failed: " + e);
+            }
+        }
+
+        async function downloadCombinedJson() {
+            if (!currentPaperData) return;
+            const allPapers = [currentPaperData, ...scrapedSubpagesList];
+            
+            try {
+                const response = await fetch("/download/combined", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ papers: allPapers, format: "json" })
+                });
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "combined_papers_metadata.json";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                }
+            } catch (e) {
+                alert("Download failed: " + e);
+            }
+        }
+
+        // --- Batch Comparison Functionality ---
+        let batchComparisonList = [];
+        let batchTargetPaper = null;
+
+        function useActiveAsBatchTarget() {
+            if (currentPaperData && currentPaperData.url) {
+                document.getElementById("batchTargetUrl").value = currentPaperData.url;
+            } else {
+                alert("Please load or scrape a paper in your Workspace first.");
+            }
+        }
+
+        async function performBatchComparison() {
+            const targetUrl = document.getElementById("batchTargetUrl").value.trim();
+            const rawCandidates = document.getElementById("batchCandidateUrls").value.trim();
+            
+            if (!targetUrl) {
+                alert("Please enter a target paper URL.");
+                return;
+            }
+            
+            const candidateUrls = rawCandidates.split('\n')
+                .map(url => url.trim())
+                .filter(url => url.length > 0);
+                
+            if (candidateUrls.length === 0) {
+                alert("Please enter at least one candidate paper URL (one per line) to compare.");
+                return;
+            }
+            
+            const btn = document.getElementById("btnBatchCompare");
+            const loader = document.getElementById("batchCompareLoader");
+            const resultsSec = document.getElementById("batchCompareResultsSection");
+            
+            btn.disabled = true;
+            loader.style.display = "flex";
+            resultsSec.style.display = "none";
+            
+            document.getElementById("batchLoaderText").textContent = "Resolving Target Paper...";
+            document.getElementById("batchLoaderSub").textContent = "Checking cache or fetching target metadata...";
+            
+            const startTime = performance.now();
+            batchComparisonList = [];
+            batchTargetPaper = null;
+            
+            try {
+                // 1. Scrape target paper
+                const targetRes = await fetch("/scrape", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: targetUrl })
+                });
+                const targetResult = await targetRes.json();
+                if (!targetRes.ok || !targetResult.success) {
+                    throw new Error("Failed to scrape target paper: " + (targetResult.error || "Unknown error"));
+                }
+                
+                batchTargetPaper = targetResult.data;
+                document.getElementById("batchResultsTargetTitle").textContent = batchTargetPaper.title;
+                
+                // 2. Sequentially scrape candidate papers
+                for (let i = 0; i < candidateUrls.length; i++) {
+                    const candUrl = candidateUrls[i];
+                    document.getElementById("batchLoaderText").textContent = `Comparing Candidates (Progress: ${i} / ${candidateUrls.length})`;
+                    const safeUrl = candUrl.length > 50 ? candUrl.substring(0, 47) + "..." : candUrl;
+                    document.getElementById("batchLoaderSub").textContent = `Processing candidate ${i + 1} of ${candidateUrls.length}:\n${safeUrl}`;
+                    
+                    try {
+                        const candRes = await fetch("/scrape", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ url: candUrl })
+                        });
+                        const candResult = await candRes.json();
+                        if (candRes.ok && candResult.success) {
+                            const candidate = candResult.data;
+                            
+                            // Compute similarity metrics dynamically using front-end calibrated algorithm
+                            const metrics = calculateBatchSimilarity(batchTargetPaper, candidate);
+                            
+                            batchComparisonList.push({
+                                paper: candidate,
+                                matchScore: metrics.matchScore,
+                                sharedTerms: metrics.sharedTerms
+                            });
+                        } else {
+                            console.error(`Failed to scrape candidate ${candUrl}:`, candResult.error);
+                        }
+                    } catch (candErr) {
+                        console.error(`Network error scraping candidate ${candUrl}:`, candErr);
+                    }
+                }
+                
+                if (batchComparisonList.length === 0) {
+                    throw new Error("Failed to successfully compare any of the candidate papers in the batch.");
+                }
+                
+                const endTime = performance.now();
+                const elapsed = ((endTime - startTime) / 1000).toFixed(2);
+                document.getElementById("batchTimeBadge").textContent = `Processed in ${elapsed}s`;
+                
+                // Sort and Render
+                sortBatchComparisonList();
+                renderBatchCompareList();
+                resultsSec.style.display = "block";
+                
+            } catch (err) {
+                alert(err.message || "An error occurred during batch comparison.");
+            } finally {
+                loader.style.display = "none";
+                btn.disabled = false;
+            }
+        }
+
+        function calculateBatchSimilarity(target, candidate) {
+            const getSigWords = (text) => {
+                if (!text) return new Set();
+                const stopwords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'with', 'by', 'of', 'is', 'are', 'was', 'were', 'that', 'this', 'these', 'those', 'based', 'using', 'proposed', 'method', 'paper', 'results', 'experimental', 'analysis']);
+                const words = text.toLowerCase().match(/\b\w{3,}\b/g) || [];
+                return new Set(words.filter(w => !stopwords.has(w)));
+            };
+            
+            const targetTitle = getSigWords(target.title || "");
+            const targetAbstract = getSigWords(target.abstract || "");
+            const targetAll = new Set([...targetTitle, ...targetAbstract]);
+            
+            const candTitle = getSigWords(candidate.title || "");
+            const candAbstract = getSigWords(candidate.abstract || "");
+            const candAll = new Set([...candTitle, ...candAbstract]);
+            
+            // 1. Title match
+            let titleOverlap = 0;
+            targetTitle.forEach(w => { if (candTitle.has(w)) titleOverlap++; });
+            const titleScore = targetTitle.size > 0 ? titleOverlap / targetTitle.size : 0.0;
+            
+            // 2. Concept match
+            let conceptOverlap = 0;
+            targetTitle.forEach(w => { if (candAll.has(w)) conceptOverlap++; });
+            const conceptScore = targetTitle.size > 0 ? conceptOverlap / targetTitle.size : 0.0;
+            
+            // 3. Abstract text overlap
+            let jaccardOverlap = 0;
+            targetAll.forEach(w => { if (candAll.has(w)) jaccardOverlap++; });
+            const unionSet = new Set([...targetAll, ...candAll]);
+            const jaccardScore = unionSet.size > 0 ? jaccardOverlap / unionSet.size : 0.0;
+            
+            const rawScore = (0.45 * titleScore) + (0.45 * conceptScore) + (0.10 * jaccardScore);
+            const matchPercentage = Math.min(98.0, Math.round(Math.sqrt(rawScore) * 100 * 10) / 10);
+            
+            const shared = [];
+            targetAll.forEach(w => { if (candAll.has(w)) shared.push(w); });
+            shared.sort();
+            
+            return {
+                matchScore: matchPercentage,
+                sharedTerms: shared
+            };
+        }
+
+        function sortBatchComparisonList() {
+            const sortBy = document.getElementById("batchSortSelect").value;
+            
+            const getYearVal = (yearStr) => {
+                if (!yearStr) return 0;
+                const match = yearStr.toString().match(/\b\d{4}\b/);
+                return match ? parseInt(match[0]) : 0;
+            };
+            
+            if (sortBy === 'similarity') {
+                batchComparisonList.sort((a, b) => b.matchScore - a.matchScore);
+            } else if (sortBy === 'date-newest') {
+                batchComparisonList.sort((a, b) => getYearVal(b.paper.year) - getYearVal(a.paper.year));
+            } else if (sortBy === 'date-oldest') {
+                batchComparisonList.sort((a, b) => getYearVal(a.paper.year) - getYearVal(b.paper.year));
+            }
+        }
+
+        function handleBatchSortChange() {
+            sortBatchComparisonList();
+            renderBatchCompareList();
+        }
+
+        function toggleBatchCard(idx) {
+            const card = document.getElementById(`batch-card-${idx}`);
+            if (card) {
+                card.classList.toggle("collapsed");
+            }
+        }
+
+        function loadBatchPaperIntoWorkspace(idx) {
+            const item = batchComparisonList[idx];
+            if (!item || !item.paper) return;
+            
+            const paper = item.paper;
+            currentPaperData = paper;
+            citationsList = paper.connected?.citations || [];
+            referencesList = paper.connected?.references || [];
+            similarList = paper.connected?.similar || [];
+            scrapedSubpagesList = [];
+            
+            navigationTrail = [paper];
+            document.getElementById("paperUrl").value = paper.url;
+            
+            renderResults(paper, true);
+            switchDashboardTab('workspace');
+        }
+
+        function renderBatchCompareList() {
+            const container = document.getElementById("batchCompareList");
+            container.innerHTML = "";
+            
+            batchComparisonList.forEach((item, idx) => {
+                const paper = item.paper;
+                const card = document.createElement("div");
+                card.className = "subpage-card collapsed";
+                card.id = `batch-card-${idx}`;
+                
+                const authorSnippet = paper.authors.split(',')[0] + (paper.authors.includes(',') ? ' et al.' : '');
+                
+                card.innerHTML = `
+                    <div class="subpage-card-header" onclick="toggleBatchCard(${idx})">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0;">
+                            <span class="subpage-index">${idx + 1}</span>
+                            
+                            <div class="badge" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #c084fc; font-weight: 700; font-size: 0.75rem; padding: 0.25rem 0.5rem; flex-shrink: 0;">
+                                ${item.matchScore}% Match
+                            </div>
+                            
+                            <span class="subpage-title" title="${paper.title}">${paper.title}</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0; color: var(--text-muted); font-size: 0.85rem;">
+                            <span>${authorSnippet} (${paper.year})</span>
+                            <i class="fa-solid fa-chevron-down toggle-icon" style="transition: transform 0.3s;"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="subpage-card-body">
+                        <div class="subpage-field">
+                            <span class="field-label">Full Title:</span>
+                            <span style="color: #ffffff; font-weight: 500;">${paper.title}</span>
+                        </div>
+                        
+                        <div class="subpage-field">
+                            <span class="field-label">Authors:</span>
+                            <span>${paper.authors}</span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 2rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+                            <div class="subpage-field" style="margin-bottom: 0;">
+                                <span class="field-label">DOI:</span>
+                                <span>${paper.doi || 'N/A'}</span>
+                            </div>
+                            <div class="subpage-field" style="margin-bottom: 0;">
+                                <span class="field-label">Article ID:</span>
+                                <span>${paper.articleNumber || 'N/A'}</span>
+                            </div>
+                            <div class="subpage-field" style="margin-bottom: 0;">
+                                <span class="field-label">URL:</span>
+                                <a href="${paper.url}" target="_blank" style="color: var(--primary); text-decoration: none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open in IEEE</a>
+                            </div>
+                        </div>
+
+                        ${item.sharedTerms && item.sharedTerms.length > 0 ? `
+                        <div class="subpage-field" style="margin-bottom: 0.75rem;">
+                            <span class="field-label" style="color: #a5b4fc;"><i class="fa-solid fa-tags"></i> Shared Concepts:</span>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.25rem;">
+                                ${item.sharedTerms.map(term => `<span class="pill" style="font-size: 0.75rem; background: rgba(165, 180, 252, 0.05); border-color: rgba(165, 180, 252, 0.15); color: #c7d2fe;">${term}</span>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        <div class="subpage-field">
+                            <span class="field-label">Abstract:</span>
+                            <p style="margin: 0.25rem 0 0 0; line-height: 1.5; color: var(--text-muted); text-align: justify; font-size: 0.9rem;">${paper.abstract}</p>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                            <button class="btn-primary" onclick="loadBatchPaperIntoWorkspace(${idx})" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">
+                                <span>Load in Workspace</span>
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
         }
     </script>
 </body>

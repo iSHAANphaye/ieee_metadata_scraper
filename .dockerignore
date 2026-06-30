@@ -1,0 +1,13 @@
+.env
+.git
+.gitignore
+__pycache__/
+*.pyc
+*.pyo
+venv/
+*.json
+*.md
+explore_*.py
+print_*.py
+listen_*.py
+*.log

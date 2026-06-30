@@ -42,31 +42,58 @@ def extract_metadata_from_html(html):
         print(f"Error parsing metadata JSON: {e}")
     return None
 
-def scrape_paper(page, url):
+def scrape_paper(page, url, fast_mode=False):
     """Scrape a single IEEE paper URL using Playwright."""
     print(f"\nProcessing: {url}")
     try:
-        # Load page with 30s timeout
-        response = page.goto(url, wait_until="load", timeout=30000)
+        html = None
         
-        # Check initial response status
-        status = response.status if response else "No response"
-        if status == 202:
-            print("AWS WAF challenge detected. Waiting for auto-reload...")
-        
-        # Poll for the metadata script to be loaded and parsed
-        metadata = None
-        max_attempts = 30  # 15 seconds max wait
-        for attempt in range(max_attempts):
+        if fast_mode:
+            print("Using Hybrid AJAX fast mode...")
             try:
-                html = page.content()
-                metadata = extract_metadata_from_html(html)
-                if metadata and metadata.get("title"):
-                    break
-            except Exception:
-                # Page might be navigating/reloading; suppress error and retry
-                pass
-            page.wait_for_timeout(500)
+                # Extract relative path to execute fetch on same origin
+                if "ieeexplore.ieee.org" in url:
+                    parts = url.split("ieeexplore.ieee.org")
+                    path = parts[1] if len(parts) > 1 else url
+                else:
+                    path = url
+                
+                # Fetch html text programmatically
+                html = page.evaluate(f"""
+                    fetch('{path}')
+                        .then(r => r.ok ? r.text() : null)
+                        .catch(() => null)
+                """)
+                
+                if not html:
+                    print("Fast mode fetch returned empty. Falling back to standard page.goto...")
+            except Exception as e:
+                print(f"Fast mode fetch error: {e}. Falling back to standard page.goto...")
+        
+        # Standard page navigation if not in fast mode or if fast mode failed
+        if not html:
+            response = page.goto(url, wait_until="load", timeout=30000)
+            
+            # Check initial response status
+            status = response.status if response else "No response"
+            if status == 202:
+                print("AWS WAF challenge detected. Waiting for auto-reload...")
+            
+            # Poll for the metadata script to be loaded and parsed
+            max_attempts = 30  # 15 seconds max wait
+            for attempt in range(max_attempts):
+                try:
+                    html = page.content()
+                    metadata = extract_metadata_from_html(html)
+                    if metadata and metadata.get("title"):
+                        break
+                except Exception:
+                    # Page might be navigating/reloading; suppress error and retry
+                    pass
+                page.wait_for_timeout(500)
+        
+        # Extract metadata from html
+        metadata = extract_metadata_from_html(html) if html else None
         
         if not metadata:
             print("Failed to load metadata. Page might have blocked access or did not render correctly.")
@@ -103,7 +130,8 @@ def scrape_paper(page, url):
             "year": pub_year,
             "doi": doi,
             "abstract": abstract,
-            "keywords": keywords_dict
+            "keywords": keywords_dict,
+            "articleNumber": metadata.get("articleNumber")
         }
         
         print(f"Successfully scraped: \"{title}\"")
@@ -112,6 +140,94 @@ def scrape_paper(page, url):
     except Exception as e:
         print(f"Error scraping {url}: {e}")
         return None
+
+def fetch_connected_papers(page, article_number):
+    """Fetch references, citations, and similar papers for a given article number."""
+    connected_data = {
+        "references": [],
+        "citations": [],
+        "similar": []
+    }
+    
+    # 1. Fetch references
+    try:
+        res = page.evaluate(f"fetch('/rest/document/{article_number}/references').then(r => r.ok ? r.json() : null).catch(() => null)")
+        if res and isinstance(res, dict):
+            raw_refs = res.get("references", [])
+            for item in raw_refs:
+                links = item.get("links", {})
+                raw_text = item.get("text", "")
+                title = item.get("title")
+                if not title and raw_text:
+                    if "." in raw_text:
+                        parts = raw_text.split(".")
+                        title = parts[1].strip() if len(parts) > 1 else raw_text
+                    else:
+                        title = raw_text
+                doc_link = links.get("documentLink")
+                art_num = links.get("articleNumber")
+                
+                connected_data["references"].append({
+                    "title": title or "Untitled Reference",
+                    "text": raw_text,
+                    "articleNumber": art_num,
+                    "url": f"https://ieeexplore.ieee.org{doc_link}" if doc_link else None,
+                    "scrapable": bool(art_num)
+                })
+    except Exception as e:
+        print(f"Error fetching references for {article_number}: {e}")
+        
+    # 2. Fetch citations
+    try:
+        res = page.evaluate(f"fetch('/rest/document/{article_number}/citations').then(r => r.ok ? r.json() : null).catch(() => null)")
+        if res and isinstance(res, dict):
+            paper_cits = res.get("paperCitations", {})
+            raw_cits = paper_cits.get("ieee", [])
+            for item in raw_cits:
+                links = item.get("links", {})
+                title = item.get("title") or item.get("displayText")
+                doc_link = links.get("documentLink")
+                art_num = links.get("articleNumber")
+                
+                connected_data["citations"].append({
+                    "title": title or "Untitled Citation",
+                    "text": item.get("displayText", ""),
+                    "articleNumber": art_num,
+                    "url": f"https://ieeexplore.ieee.org{doc_link}" if doc_link else None,
+                    "scrapable": bool(art_num)
+                })
+    except Exception as e:
+        print(f"Error fetching citations for {article_number}: {e}")
+        
+    # 3. Fetch similar papers
+    try:
+        res = page.evaluate(f"fetch('/rest/document/{article_number}/similar').then(r => r.ok ? r.json() : null).catch(() => null)")
+        if res and isinstance(res, dict):
+            raw_sim = res.get("similar", [])
+            for item in raw_sim:
+                doc_link = item.get("documentLink")
+                art_num = item.get("articleNumber")
+                authors_list = item.get("author", [])
+                if isinstance(authors_list, list):
+                    if len(authors_list) > 0 and isinstance(authors_list[0], dict):
+                        authors = ", ".join([a.get("preferredName") or a.get("name") or "" for a in authors_list if isinstance(a, dict)])
+                    else:
+                        authors = ", ".join([str(a) for a in authors_list])
+                else:
+                    authors = str(authors_list)
+                
+                connected_data["similar"].append({
+                    "title": item.get("title") or "Untitled Similar Paper",
+                    "authors": authors or "Unknown Authors",
+                    "year": item.get("publicationYear") or "Unknown Year",
+                    "articleNumber": art_num,
+                    "url": f"https://ieeexplore.ieee.org{doc_link}" if doc_link else (f"https://ieeexplore.ieee.org/document/{art_num}" if art_num else None),
+                    "scrapable": bool(art_num)
+                })
+    except Exception as e:
+        print(f"Error fetching similar papers for {article_number}: {e}")
+        
+    return connected_data
 
 def save_to_markdown(papers, filepath, append=False):
     """Save scraped papers metadata as a Markdown file."""

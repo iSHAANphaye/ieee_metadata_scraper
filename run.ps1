@@ -4,4 +4,4 @@ docker rm paper-scraper 2>$null
 
 # Run the container with the name 'paper-scraper'
 Write-Host "Starting Paper Scraper container..."
-docker run -p 5001:5000 --name paper-scraper paper-scraper
+docker run -p 5001:5000 --env-file .env --name paper-scraper paper-scraper

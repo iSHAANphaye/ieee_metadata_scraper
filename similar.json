@@ -1,0 +1,197 @@
+{
+    "getProgramTermsAccepted": false,
+    "similar": [
+        {
+            "articleNumber": "6116068",
+            "title": "Learning shape statistics for hierarchical 3D medical image segmentation",
+            "publicationNumber": "6094293",
+            "publicationTitle": "2011 18th IEEE International Conference on Image Processing",
+            "publicationYear": "2011",
+            "author": [
+                "Wuxia Zhang",
+                "Yuan Yuan",
+                "Xuelong Li",
+                "Pingkun Yan"
+            ],
+            "contentType": "Conferences",
+            "documentLink": "/document/6116068/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "1650515",
+            "title": "Shape Statistics Variational Approach for the Outer Contour Segmentation of Left Ventricle MR Images",
+            "publicationNumber": "4233",
+            "publicationTitle": "IEEE Transactions on Information Technology in Biomedicine",
+            "publicationYear": "2006",
+            "author": [
+                "Q. Chen",
+                "Z.M. Zhou",
+                "M. Tang",
+                "P.A. Heng",
+                "D.S. Xia"
+            ],
+            "contentType": "Journals & Magazines",
+            "documentLink": "/document/1650515/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "4359073",
+            "title": "Segmenting Lung Fields in Serial Chest Radiographs Using Both Population-Based and Patient-Specific Shape Statistics",
+            "publicationNumber": "42",
+            "publicationTitle": "IEEE Transactions on Medical Imaging",
+            "publicationYear": "2008",
+            "author": [
+                "Yonghong Shi",
+                "Feihu Qi",
+                "Zhong Xue",
+                "Liya Chen",
+                "Kyoko Ito",
+                "Hidenori Matsuo",
+                "Dinggang Shen"
+            ],
+            "contentType": "Journals & Magazines",
+            "documentLink": "/document/4359073/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "5368898",
+            "title": "Phase Field Based Texture Image Segmentation Using Shape Prior Technology",
+            "publicationNumber": "5367995",
+            "publicationTitle": "2009 Second International Symposium on Computational Intelligence and Design",
+            "publicationYear": "2009",
+            "author": [
+                "Zhilin Feng",
+                "Shuwang Du",
+                "Yanming Ye",
+                "Xiaoming Liu",
+                "Wuheng Zuo"
+            ],
+            "contentType": "Conferences",
+            "documentLink": "/document/5368898/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "4380029",
+            "title": "Projection onto a Shape Manifold for Image Segmentation with Prior",
+            "publicationNumber": "4378863",
+            "publicationTitle": "2007 IEEE International Conference on Image Processing",
+            "publicationYear": "2007",
+            "author": [
+                "Patrick Etyngier",
+                "Renaud Keriven",
+                "Florent Segonne"
+            ],
+            "contentType": "Conferences",
+            "documentLink": "/document/4380029/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "8672808",
+            "title": "TeTrIS: Template Transformer Networks for Image Segmentation With Shape Priors",
+            "publicationNumber": "42",
+            "publicationTitle": "IEEE Transactions on Medical Imaging",
+            "publicationYear": "2019",
+            "author": [
+                "Matthew Chung Hai Lee",
+                "Kersten Petersen",
+                "Nick Pawlowski",
+                "Ben Glocker",
+                "Michiel Schaap"
+            ],
+            "contentType": "Journals & Magazines",
+            "documentLink": "/document/8672808/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "5406082",
+            "title": "Discrete Deformable Model Guided by Partial Active Shape Model for TRUS Image Segmentation",
+            "publicationNumber": "10",
+            "publicationTitle": "IEEE Transactions on Biomedical Engineering",
+            "publicationYear": "2010",
+            "author": [
+                "Pingkun Yan",
+                "Sheng Xu",
+                "Baris Turkbey",
+                "Jochen Kruecker"
+            ],
+            "contentType": "Journals & Magazines",
+            "documentLink": "/document/5406082/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "1167870",
+            "title": "Shape-similarity search of three-dimensional models using parameterized statistics",
+            "publicationNumber": "8358",
+            "publicationTitle": "10th Pacific Conference on Computer Graphics and Applications, 2002. Proceedings.",
+            "publicationYear": "2002",
+            "author": [
+                "R. Ohbuchi",
+                "T. Otagiri",
+                "M. Ibato",
+                "T. Takei"
+            ],
+            "contentType": "Conferences",
+            "documentLink": "/document/1167870/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "5643109",
+            "title": "Adaptively Learning Local Shape Statistics for Prostate Segmentation in Ultrasound",
+            "publicationNumber": "10",
+            "publicationTitle": "IEEE Transactions on Biomedical Engineering",
+            "publicationYear": "2011",
+            "author": [
+                "Pingkun Yan",
+                "Sheng Xu",
+                "Baris Turkbey",
+                "Jochen Kruecker"
+            ],
+            "contentType": "Journals & Magazines",
+            "documentLink": "/document/5643109/",
+            "isArticle": "true"
+        },
+        {
+            "articleNumber": "5453358",
+            "title": "Shape \u201cBreak-and-Repair\u201d Strategy and Its Application to Automated Medical Image Segmentation",
+            "publicationNumber": "2945",
+            "publicationTitle": "IEEE Transactions on Visualization and Computer Graphics",
+            "publicationYear": "2011",
+            "author": [
+                "Jiantao Pu",
+                "David S. Paik",
+                "Xin Meng",
+                "Justus Roos",
+                "Geoffrey D. Rubin"
+            ],
+            "contentType": "Journals & Magazines",
+            "documentLink": "/document/5453358/",
+            "isArticle": "true"
+        }
+    ],
+    "formulaStrippedArticleTitle": "Shape Statistics for Image Segmentation with Prior",
+    "isGetAddressInfoCaptured": false,
+    "isMarketingOptIn": false,
+    "publisher": "IEEE",
+    "isEarlyAccess": false,
+    "isSpringer": false,
+    "isChapter": false,
+    "isStandard": false,
+    "isConference": true,
+    "isBook": false,
+    "isProduct": false,
+    "isJournal": false,
+    "isNow": false,
+    "isCustomDenial": false,
+    "isOUP": false,
+    "isSAE": false,
+    "persistentLink": "https://ieeexplore.ieee.org/servlet/opac?punumber=4269955",
+    "isDegruyter": false,
+    "isSMPTE": false,
+    "contentTypeDisplay": "Conferences",
+    "mlTime": "PT0.018867S",
+    "lastupdate": "2026-03-28",
+    "mediaPath": "/mediastore/IEEE/content/media/4269955/4269956/4270034",
+    "title": "Shape Statistics for Image Segmentation with Prior",
+    "contentType": "conferences",
+    "publicationNumber": "4269955"
+}

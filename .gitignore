@@ -1,0 +1,25 @@
+# Environments
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+ENV/
+env/
+
+# IDE files
+.idea/
+.vscode/
+
+# Scraper artifacts/outputs
+similar.json
+toc.json
+urls.txt
+screenshot.png
+raw_page.html
+*.log

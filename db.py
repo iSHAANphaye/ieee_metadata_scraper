@@ -15,8 +15,10 @@ try:
 except Exception:
     pass
 
-# Fetch Mongo URI from environment variable, fallback to local host connection
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/paper_scraper_db")
+# Fetch Mongo URI from environment variable
+# If running inside Docker container, default to 'db' service name from docker-compose; otherwise localhost
+default_host = "db" if os.path.exists("/.dockerenv") else "localhost"
+MONGO_URI = os.getenv("MONGO_URI", f"mongodb://{default_host}:27017/paper_scraper_db")
 
 # Initialize Client
 # We use a try-except block so that even if MongoDB is not reachable immediately, the app doesn't crash on start
@@ -28,6 +30,8 @@ try:
     print("Successfully connected to MongoDB.")
 except Exception as e:
     print(f"Warning: Could not connect to MongoDB at {MONGO_URI}. Details: {e}")
+    if "localhost" in MONGO_URI or "db" in MONGO_URI:
+        print("Tip: If you intended to connect to a remote database (like MongoDB Atlas), make sure the MONGO_URI environment variable is passed (e.g. by using run.ps1, run.sh, or docker run --env-file .env).")
     # Fallback mock setup if DB is offline during development/build
     client = None
     db = None

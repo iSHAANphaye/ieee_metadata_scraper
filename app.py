@@ -124,6 +124,19 @@ def do_logout():
     session.pop("user", None)
     return jsonify({"success": True, "message": "Successfully logged out."})
 
+@app.route("/delete-account", methods=["POST"])
+def delete_account():
+    if not is_authenticated():
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    email = session["user"]
+    from db import delete_user_data
+    success, message = delete_user_data(email)
+    if success:
+        session.pop("user", None)
+        return jsonify({"success": True, "message": message})
+    return jsonify({"error": message}), 500
+
 @app.route("/history", methods=["GET"])
 def get_history():
     if not is_authenticated():
@@ -331,6 +344,154 @@ def search_similar_ieee(art_num):
         return jsonify({"error": f"Failed to search similar papers on IEEE: {str(e)}"}), 500
 
 
+@app.route("/search-by-keywords", methods=["POST"])
+def search_by_keywords():
+    if not is_authenticated():
+        return jsonify({"error": "Unauthorized"}), 401
+        
+    data = request.json or {}
+    raw_query = data.get("queryText", "").strip()
+    active_art_num = data.get("activeArticleNumber")
+    if not raw_query:
+        return jsonify({"error": "Query keywords are required."}), 400
+        
+    # Split by commas or newlines first to extract individual keyword phrases
+    parts = re.split(r'[\n\r,]+', raw_query)
+    keywords = []
+    for part in parts:
+        part_clean = part.strip()
+        if not part_clean:
+            continue
+        # Wrap multi-word phrases in quotes to preserve exact phrase match in IEEE Xplore
+        if ' ' in part_clean and not (part_clean.startswith('"') and part_clean.endswith('"')):
+            part_clean = f'"{part_clean}"'
+        keywords.append(part_clean)
+        
+    # If no commas or newlines, split by spaces
+    if len(keywords) == 1 and not (raw_query.startswith('"') and raw_query.endswith('"')):
+        space_parts = [p.strip() for p in raw_query.split(' ') if p.strip()]
+        if len(space_parts) > 1:
+            keywords = space_parts
+            
+    query_text = " AND ".join(keywords)
+    if not query_text:
+        return jsonify({"error": "Valid query keywords are required."}), 400
+        
+    try:
+        # Determine target paper or query text words for similarity comparison
+        target = None
+        if active_art_num:
+            from db import get_papers_col
+            col = get_papers_col()
+            if col is not None:
+                target = col.find_one({"_id": str(active_art_num), "scraped_by": session["user"]})
+                
+        if target:
+            target_title_words = get_significant_words(target.get("title", ""))
+            target_abstract_words = get_significant_words(target.get("abstract", ""))
+            target_all_words = target_title_words | target_abstract_words
+        else:
+            # Fallback: compare against query keywords themselves!
+            target_title_words = get_significant_words(query_text)
+            target_abstract_words = set()
+            target_all_words = target_title_words
+            
+        print(f"Executing IEEE keyword search: {query_text}")
+        
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True, args=["--disable-dev-shm-usage", "--no-sandbox"])
+            context = browser.new_context(
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            )
+            page = context.new_page()
+            
+            # Navigate to search page or a dummy page on same domain to handle cookie/WAF setup
+            page.goto("https://ieeexplore.ieee.org")
+            page.wait_for_timeout(2000)
+            
+            js_code = """
+            (async () => {
+                const res = await fetch('https://ieeexplore.ieee.org/rest/search', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json, text/plain, */*',
+                        'X-Security-Request': 'required'
+                    },
+                    body: JSON.stringify({ 
+                        queryText: %s, 
+                        highlight: true, 
+                        returnFacets: ["ALL"], 
+                        returnType: "SEARCH", 
+                        rowsPerPage: 15, 
+                        pageNumber: 1 
+                    })
+                });
+                return await res.json();
+            })()
+            """ % json.dumps(query_text)
+            
+            search_result = page.evaluate(js_code)
+            browser.close()
+            
+        records = search_result.get("records", [])
+        results = []
+        for rec in records:
+            art_id = rec.get("articleNumber")
+            doc_link = rec.get("documentLink")
+            
+            if active_art_num and str(art_id) == str(active_art_num):
+                continue
+                
+            auths = []
+            for a in rec.get("authors", []):
+                name = a.get("preferredName")
+                if name:
+                    auths.append(name)
+            authors_str = ", ".join(auths) if auths else "Unknown Authors"
+            
+            # Compute text similarity metrics with concept matching and calibration
+            rec_title_words = get_significant_words(rec.get("articleTitle", ""))
+            rec_abstract_words = get_significant_words(rec.get("abstract", ""))
+            rec_all_words = rec_title_words | rec_abstract_words
+            
+            title_overlap = len(target_title_words.intersection(rec_title_words))
+            title_score = title_overlap / len(target_title_words) if target_title_words else 0.0
+            
+            concept_overlap = len(target_title_words.intersection(rec_all_words))
+            concept_score = concept_overlap / len(target_title_words) if target_title_words else 0.0
+            
+            jaccard_overlap = len(target_all_words.intersection(rec_all_words))
+            jaccard_union = len(target_all_words.union(rec_all_words))
+            jaccard_score = jaccard_overlap / jaccard_union if jaccard_union else 0.0
+            
+            # Weighted formula: Title match (45%), Concept presence (45%), Abstract text overlap (10%)
+            raw_score = (0.45 * title_score) + (0.45 * concept_score) + (0.10 * jaccard_score)
+            
+            # Calibrate using square root (0.5 power) to scale scores to a friendly 60-70%+ range
+            match_percentage = min(98.0, round((raw_score ** 0.5) * 100, 1))
+            shared_terms = sorted(list(target_all_words.intersection(rec_all_words)))
+            
+            results.append({
+                "title": rec.get("articleTitle") or "Untitled Paper",
+                "authors": authors_str,
+                "year": rec.get("publicationYear") or "Unknown Year",
+                "articleNumber": art_id,
+                "url": f"https://ieeexplore.ieee.org{doc_link}" if doc_link else (f"https://ieeexplore.ieee.org/document/{art_id}" if art_id else None),
+                "scrapable": bool(art_id),
+                "matchScore": match_percentage,
+                "sharedTerms": shared_terms
+            })
+            
+        # Sort results by matchScore descending
+        results.sort(key=lambda x: x["matchScore"], reverse=True)
+            
+        return jsonify({"success": True, "data": results, "query": query_text})
+    except Exception as e:
+        return jsonify({"error": f"Failed to search papers on IEEE: {str(e)}"}), 500
+
+
 # --- Scraper & Core Endpoints ---
 
 @app.route("/")
@@ -357,6 +518,11 @@ def do_scrape():
         cached = get_cached_paper(art_num)
         if cached:
             print(f"Cache Hit for paper ID: {art_num}")
+            # Associate this cached paper with the current user's history registry
+            if cached.get("scraped_by") != session["user"]:
+                cache_paper(cached, email=session["user"])
+                # Reload to get updated document
+                cached = get_cached_paper(art_num) or cached
             return jsonify({"success": True, "data": clean_mongo_doc(cached), "cached": True})
             
     # Cache Miss: Scrape via Playwright

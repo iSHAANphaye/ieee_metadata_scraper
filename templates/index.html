@@ -391,6 +391,36 @@
             filter: none;
         }
 
+        .btn-secondary {
+            padding: 1.1rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: #ffffff;
+            border-radius: 1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* Loader view */
         .loader-container {
             display: none;
@@ -1019,6 +1049,217 @@
             40%, 80% { transform: translateX(6px); }
         }
 
+        /* Collapsible Sidebar Drawer */
+        .sidebar-drawer {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 320px;
+            background: rgba(10, 10, 15, 0.95);
+            border-right: 1px solid var(--glass-border);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            z-index: 1000;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 10px 0 35px rgba(0, 0, 0, 0.6);
+        }
+        .sidebar-drawer.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.75rem;
+        }
+
+        .sidebar-header-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .btn-sidebar-close {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            outline: none;
+        }
+        .btn-sidebar-close:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .btn-sidebar-toggle {
+            position: fixed;
+            left: 1.5rem;
+            top: 1.5rem;
+            background: rgba(18, 18, 24, 0.6);
+            border: 1px solid var(--glass-border);
+            color: #ffffff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            z-index: 998;
+        }
+        .btn-sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Sidebar content sections */
+        .sidebar-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0 0 0.75rem 0;
+            line-height: 1.4;
+        }
+        
+        .user-profile-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .user-profile-email {
+            font-size: 0.85rem;
+            color: #ffffff;
+            word-break: break-all;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .btn-sidebar-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.03);
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+        .btn-sidebar-action:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn-sidebar-action.btn-danger {
+            border-color: rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.05);
+            color: #fca5a5;
+        }
+        .btn-sidebar-action.btn-danger:hover {
+            background: rgba(239, 68, 68, 0.12);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #ef4444;
+        }
+        
+        .sidebar-history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+        
+        /* Custom scrollbar for history list */
+        .sidebar-history-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-history-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .sidebar-history-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        .sidebar-history-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
         /* Responsive */
         @media (max-width: 640px) {
             .form-group {
@@ -1058,6 +1299,64 @@
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
+    <!-- Sidebar Backdrop Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
+
+    <!-- Toggle menu button (Fixed floating top-left) -->
+    <button class="btn-sidebar-toggle" id="openSidebarBtn" onclick="toggleSidebar(true)">
+        <i class="fa-solid fa-bars"></i>
+        <span>Menu</span>
+    </button>
+
+    <!-- COLLAPSIBLE SIDEBAR DRAWER -->
+    <div class="sidebar-drawer" id="sidebarPanel">
+        <div class="sidebar-header">
+            <div class="sidebar-header-title">
+                <i class="fa-solid fa-bars" style="color: var(--primary);"></i>
+                <span>Menu</span>
+            </div>
+            <button type="button" class="btn-sidebar-close" onclick="toggleSidebar(false)">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- USER DASHBOARD WIDGET -->
+        <div class="sidebar-section">
+            <div class="sidebar-title">
+                <i class="fa-solid fa-circle-user" style="color: var(--primary);"></i>
+                <span>User Dashboard</span>
+            </div>
+            <div class="user-profile-box">
+                <div class="user-profile-email">
+                    <i class="fa-regular fa-envelope" style="color: var(--primary);"></i>
+                    <span id="sidebarUserEmail">user@example.com</span>
+                </div>
+                <div class="profile-actions">
+                    <button type="button" class="btn-sidebar-action" onclick="handleLogout()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Log Out</span>
+                    </button>
+                    <button type="button" class="btn-sidebar-action btn-danger" onclick="confirmDeleteAccount()">
+                        <i class="fa-solid fa-user-slash"></i>
+                        <span>Delete Account</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SCRAPE HISTORY WIDGET -->
+        <div class="sidebar-section" style="margin-top: 1rem; flex: 1; display: flex; flex-direction: column; min-height: 0;">
+            <div class="sidebar-title">
+                <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent);"></i>
+                <span>Scrape History</span>
+            </div>
+            <p class="sidebar-subtitle">Click a paper to load it into the workspace.</p>
+            <div id="historyListContainer" class="sidebar-history-list">
+                <!-- History cards dynamically rendered here -->
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo-container">
@@ -1065,32 +1364,7 @@
             </div>
             <h1>Paper Scraper</h1>
             <p class="subtitle">Extract titles, abstracts, and keywords from academic papers instantly. Solve WAF verification, check citations, and bulk scrape connected papers recursively.</p>
-            
-            <div class="user-badge" id="userBadge">
-                <span><i class="fa-regular fa-circle-user" style="color: var(--primary);"></i> <span id="userEmailLabel">user@example.com</span></span>
-                <button class="btn-logout" onclick="handleLogout()">Log Out</button>
-            </div>
         </header>
-
-        <!-- Navigation Tabs (Visible when logged in) -->
-        <div class="navigation-bar" id="navigationBar" style="display: none;">
-            <button class="nav-btn active" id="nav-btn-dashboard" onclick="switchDashboardTab('workspace')">
-                <i class="fa-solid fa-laptop-code"></i>
-                <span>Workspace</span>
-            </button>
-            <button class="nav-btn" id="nav-btn-history" onclick="switchDashboardTab('history')">
-                <i class="fa-solid fa-clock-rotate-left"></i>
-                <span>Scrape History</span>
-            </button>
-            <button class="nav-btn" id="nav-btn-ieee-search" onclick="switchDashboardTab('ieee-search-tab')">
-                <i class="fa-solid fa-magnifying-glass-chart"></i>
-                <span>IEEE Similarity Search</span>
-            </button>
-            <button class="nav-btn" id="nav-btn-batch-compare" onclick="switchDashboardTab('batch-compare')">
-                <i class="fa-solid fa-code-compare"></i>
-                <span>Batch Comparison</span>
-            </button>
-        </div>
 
         <!-- Auth Panel (Shown if not logged in) -->
         <div class="panel" id="authPanel">
@@ -1132,7 +1406,29 @@
 
         <!-- Main Dashboard Workspace (Shown if logged in) -->
         <div id="dashboardPanel" style="display: none;">
-            <div class="panel">
+            <!-- Navigation Tabs (Visible when logged in) -->
+            <div class="navigation-bar" id="navigationBar">
+                <button class="nav-btn active" id="nav-btn-dashboard" onclick="switchDashboardTab('workspace')">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span>Workspace</span>
+                </button>
+                <button class="nav-btn" id="nav-btn-ieee-search" onclick="switchDashboardTab('ieee-search-tab')">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <span>IEEE Similarity Search</span>
+                </button>
+                <button class="nav-btn" id="nav-btn-keyword-search" onclick="switchDashboardTab('keyword-search')">
+                    <i class="fa-solid fa-tags"></i>
+                    <span>IEEE Keyword Search</span>
+                </button>
+                <button class="nav-btn" id="nav-btn-batch-compare" onclick="switchDashboardTab('batch-compare')">
+                    <i class="fa-solid fa-code-compare"></i>
+                    <span>Batch Comparison</span>
+                </button>
+            </div>
+            
+            <!-- Workspace Panel -->
+            <div id="workspacePanel">
+                <div class="panel">
                 <form id="scraperForm" onsubmit="handleScrape(event)">
                     <div class="form-group">
                         <div class="input-wrapper">
@@ -1247,6 +1543,13 @@
                         </div>
                         
                         <div class="quick-select-row">
+                            <span class="quick-select-label">Sort:</span>
+                            <select id="connectedSortSelect" onchange="renderConnectedList()" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); border-radius: 0.5rem; color: #ffffff; padding: 0.25rem 0.5rem; font-size: 0.8rem; outline: none; cursor: pointer; margin-right: 1rem;">
+                                <option value="default">Default</option>
+                                <option value="year-newest">Year (Newest)</option>
+                                <option value="year-oldest">Year (Oldest)</option>
+                            </select>
+                            
                             <span class="quick-select-label">Select:</span>
                             <button class="btn-select-pill" onclick="selectQuick(2)">Top 2</button>
                             <button class="btn-select-pill" onclick="selectQuick(5)">Top 5</button>
@@ -1260,14 +1563,20 @@
                         <!-- Dynamic list entries -->
                     </div>
 
-                    <div class="bulk-action-bar">
-                        <div class="bulk-count-label">
-                            Selected papers to scrape: <strong id="selectedCount">0</strong>
+                    <div class="bulk-action-bar" style="display: flex; gap: 1rem; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+                        <div class="bulk-count-label" style="margin-bottom: 0;">
+                            Selected papers: <strong id="selectedCount">0</strong>
                         </div>
-                        <button class="btn-primary" id="btnBulkScrape" onclick="executeBulkScrape()" disabled>
-                            <span>Scrape Selected Papers</span>
-                            <i class="fa-solid fa-layer-group"></i>
-                        </button>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="btn-secondary" id="btnCopySelectedUrls" onclick="copySelectedUrlsToClipboard()" disabled style="padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 0.75rem;">
+                                <span>Copy URLs</span>
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                            <button class="btn-primary" id="btnBulkScrape" onclick="executeBulkScrape()" disabled style="padding: 0.8rem 1.5rem; font-size: 0.9rem; border-radius: 0.75rem;">
+                                <span>Scrape Selected</span>
+                                <i class="fa-solid fa-layer-group"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1306,23 +1615,8 @@
                         </button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Scrape History Panel (Shown if logged in) -->
-        <div class="panel" id="historyPanel" style="display: none; animation: fadeInUp 0.5s ease-out;">
-            <div class="section-title">
-                <i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i>
-                <span>Scraped Papers Registry</span>
-            </div>
-            <p class="subtitle" style="text-align: left; margin: 0 0 1.5rem 0; font-size: 0.9rem;">
-                A collection of all papers scraped by your account. Click 'Load in Workspace' to bring any paper back into the active workspace.
-            </p>
-            
-            <div id="historyListContainer" style="display: flex; flex-direction: column; gap: 1rem;">
-                <!-- History cards dynamically rendered here -->
-            </div>
-        </div>
+            </div> <!-- End subpagesSection -->
+        </div> <!-- End workspacePanel -->
 
         <!-- IEEE Similarity Search Panel (Shown if logged in) -->
         <div class="panel" id="ieeeSearchTabPanel" style="display: none; animation: fadeInUp 0.5s ease-out;">
@@ -1394,6 +1688,75 @@
                         Selected papers to scrape: <strong id="standaloneSelectedCount">0</strong>
                     </div>
                     <button class="btn-primary" id="btnStandaloneBulkScrape" onclick="executeStandaloneBulkScrape()" disabled>
+                        <span>Scrape Selected Papers</span>
+                        <i class="fa-solid fa-layer-group"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- IEEE Keyword Search Panel (Shown if logged in) -->
+        <div class="panel" id="keywordSearchPanel" style="display: none; animation: fadeInUp 0.5s ease-out;">
+            <div class="section-title">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--accent);"></i>
+                <span>IEEE Keyword Search Engine</span>
+            </div>
+            <p class="subtitle" style="text-align: left; margin: 0 0 1.5rem 0; font-size: 0.9rem;">
+                Search IEEE Xplore papers using custom keywords. Results will show similarity metrics computed against your currently loaded workspace paper (or against your search keywords if no paper is loaded).
+            </p>
+            
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="keywordSearchInput" 
+                        placeholder="Enter keywords (e.g. machine learning, infrared target detection)..." 
+                        required
+                        style="width: 100%; padding: 1.1rem 1.25rem 1.1rem 3rem; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--glass-border); border-radius: 1rem; color: var(--text-main); font-family: var(--font-family); font-size: 1rem; outline: none; transition: var(--transition);"
+                    >
+                    <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                </div>
+                <button type="button" class="btn-primary" onclick="performKeywordSearch()" id="btnKeywordSearch">
+                    <span>Search</span>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div id="keywordSearchLoader" style="display: none; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; background: rgba(255, 255, 255, 0.01); border: 1px dashed var(--glass-border); border-radius: 1rem; margin-bottom: 2rem;">
+                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <h4 style="color: #ffffff; margin-bottom: 0.25rem;" id="keywordLoaderText">Searching IEEE database...</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;" id="keywordLoaderSub">Solving WAF challenge & retrieving records...</p>
+            </div>
+
+            <div id="keywordSearchResultsSection" style="display: none;">
+                <div class="section-title" style="font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span>
+                        <i class="fa-solid fa-list-check" style="color: var(--primary);"></i>
+                        <span>Search Results from IEEE</span>
+                    </span>
+                    <span class="badge" id="keywordTimeBadge" style="background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">Processed in 0.00s</span>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <div class="quick-select-row" style="margin-bottom: 0;">
+                        <span class="quick-select-label">Select:</span>
+                        <button class="btn-select-pill" onclick="selectKeywordQuick(2)">Top 2</button>
+                        <button class="btn-select-pill" onclick="selectKeywordQuick(5)">Top 5</button>
+                        <button class="btn-select-pill" onclick="selectKeywordQuick(10)">Top 10</button>
+                        <button class="btn-select-pill" onclick="selectKeywordAll(true)">All</button>
+                        <button class="btn-select-pill" onclick="selectKeywordAll(false)">None</button>
+                    </div>
+                </div>
+
+                <div id="keywordSearchList" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;">
+                    <!-- Results checkable cards -->
+                </div>
+
+                <div class="bulk-action-bar" style="margin-top: 1rem;">
+                    <div class="bulk-count-label">
+                        Selected papers to scrape: <strong id="keywordSelectedCount">0</strong>
+                    </div>
+                    <button class="btn-primary" id="btnKeywordBulkScrape" onclick="executeKeywordBulkScrape()" disabled>
                         <span>Scrape Selected Papers</span>
                         <i class="fa-solid fa-layer-group"></i>
                     </button>
@@ -1481,7 +1844,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div> <!-- End dashboardPanel -->
+    </div> <!-- End container -->
 
     <script>
         let authMode = "login"; // 'login' or 'signup'
@@ -1529,24 +1893,31 @@
                 const data = await res.json();
                 
                 const authPanel = document.getElementById("authPanel");
-                const userBadge = document.getElementById("userBadge");
                 const navigationBar = document.getElementById("navigationBar");
+                const dashboardPanel = document.getElementById("dashboardPanel");
+                const openSidebarBtn = document.getElementById("openSidebarBtn");
                 
                 if (data.authenticated) {
                     authPanel.style.display = "none";
                     navigationBar.style.display = "flex";
-                    userBadge.style.display = "flex";
-                    document.getElementById("userEmailLabel").textContent = data.email;
+                    dashboardPanel.style.display = "block";
+                    if (openSidebarBtn) openSidebarBtn.style.display = "flex";
+                    document.getElementById("sidebarUserEmail").textContent = data.email;
+                    
+                    // Load scrape history in the sidebar registry
+                    loadHistoryFromServer();
                     
                     // Default to workspace tab
                     switchDashboardTab('workspace');
                 } else {
                     authPanel.style.display = "block";
                     navigationBar.style.display = "none";
-                    document.getElementById("dashboardPanel").style.display = "none";
-                    document.getElementById("historyPanel").style.display = "none";
+                    dashboardPanel.style.display = "none";
+                    if (openSidebarBtn) openSidebarBtn.style.display = "none";
+                    toggleSidebar(false);
                     document.getElementById("ieeeSearchTabPanel").style.display = "none";
-                    userBadge.style.display = "none";
+                    document.getElementById("keywordSearchPanel").style.display = "none";
+                    document.getElementById("batchComparePanel").style.display = "none";
                 }
             } catch (e) {
                 console.error("Auth check failed:", e);
@@ -1609,10 +1980,13 @@
                 similarList = [];
                 scrapedSubpagesList = [];
                 standaloneSearchList = [];
+                keywordSearchList = [];
                 navigationTrail = [];
                 
                 document.getElementById("similarSearchUrl").value = "";
+                document.getElementById("keywordSearchInput").value = "";
                 document.getElementById("standaloneSearchResultsSection").style.display = "none";
+                document.getElementById("keywordSearchResultsSection").style.display = "none";
                 document.getElementById("results").style.display = "none";
                 document.getElementById("subpagesSection").style.display = "none";
             } catch (e) {
@@ -1620,38 +1994,73 @@
             }
         }
 
+        function toggleSidebar(isOpen) {
+            const sidebar = document.getElementById("sidebarPanel");
+            const overlay = document.getElementById("sidebarOverlay");
+            if (sidebar && overlay) {
+                if (isOpen) {
+                    sidebar.classList.add("open");
+                    overlay.classList.add("open");
+                } else {
+                    sidebar.classList.remove("open");
+                    overlay.classList.remove("open");
+                }
+            }
+        }
+
+        async function confirmDeleteAccount() {
+            const confirmed1 = confirm("⚠️ WARNING: Are you absolutely sure you want to delete your account?\nThis action cannot be undone.");
+            if (!confirmed1) return;
+            
+            const confirmed2 = confirm("⚠️ DOUBLE CONFIRMATION: Deleting your account will permanently erase your profile and delete all of your scraped papers data from the database. Proceed?");
+            if (!confirmed2) return;
+            
+            try {
+                const response = await fetch("/delete-account", { method: "POST" });
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    alert("Account and scraped papers data successfully erased. Goodbye!");
+                    await checkAuth(); // Reset back to auth panel
+                } else {
+                    alert("Account deletion failed: " + (result.error || "Unknown error"));
+                }
+            } catch (err) {
+                alert("Failed to connect to the deletion server.");
+            }
+        }
+
         // Dashboard Tab Navigation Handler
         async function switchDashboardTab(tabName) {
             const workspaceBtn = document.getElementById("nav-btn-dashboard");
-            const historyBtn = document.getElementById("nav-btn-history");
             const searchBtn = document.getElementById("nav-btn-ieee-search");
+            const keywordSearchBtn = document.getElementById("nav-btn-keyword-search");
             const batchCompareBtn = document.getElementById("nav-btn-batch-compare");
             
-            const dashboardPanel = document.getElementById("dashboardPanel");
-            const historyPanel = document.getElementById("historyPanel");
+            const workspacePanel = document.getElementById("workspacePanel");
             const searchPanel = document.getElementById("ieeeSearchTabPanel");
+            const keywordSearchPanel = document.getElementById("keywordSearchPanel");
             const batchComparePanel = document.getElementById("batchComparePanel");
             
             workspaceBtn.classList.remove("active");
-            historyBtn.classList.remove("active");
             searchBtn.classList.remove("active");
+            if (keywordSearchBtn) keywordSearchBtn.classList.remove("active");
             if (batchCompareBtn) batchCompareBtn.classList.remove("active");
             
-            dashboardPanel.style.display = "none";
-            historyPanel.style.display = "none";
+            workspacePanel.style.display = "none";
             searchPanel.style.display = "none";
+            if (keywordSearchPanel) keywordSearchPanel.style.display = "none";
             if (batchComparePanel) batchComparePanel.style.display = "none";
             
             if (tabName === 'workspace') {
                 workspaceBtn.classList.add("active");
-                dashboardPanel.style.display = "block";
-            } else if (tabName === 'history') {
-                historyBtn.classList.add("active");
-                historyPanel.style.display = "block";
-                await loadHistoryFromServer();
+                workspacePanel.style.display = "block";
             } else if (tabName === 'ieee-search-tab') {
                 searchBtn.classList.add("active");
                 searchPanel.style.display = "block";
+            } else if (tabName === 'keyword-search') {
+                if (keywordSearchBtn) keywordSearchBtn.classList.add("active");
+                if (keywordSearchPanel) keywordSearchPanel.style.display = "block";
             } else if (tabName === 'batch-compare') {
                 if (batchCompareBtn) batchCompareBtn.classList.add("active");
                 if (batchComparePanel) batchComparePanel.style.display = "block";
@@ -1750,6 +2159,9 @@
             // Hide subpages section initially
             document.getElementById("subpagesSection").style.display = "none";
             
+            // Close the collapsible sidebar drawer
+            toggleSidebar(false);
+
             // Switch view back to Dashboard/Workspace
             switchDashboardTab('workspace');
         }
@@ -2120,11 +2532,20 @@
                 return;
             }
             
-            const list = getActiveList();
+            let list = getActiveList();
             
             if (list.length === 0) {
                 listContainer.innerHTML = `<div style="padding: 2rem; text-align: center; color: var(--text-muted);">No connected papers found in this category.</div>`;
                 return;
+            }
+            
+            const sortVal = document.getElementById("connectedSortSelect").value;
+            if (sortVal === "year-newest" || sortVal === "year-oldest") {
+                list = [...list].sort((a, b) => {
+                    const yearA = parseInt(a.year) || 0;
+                    const yearB = parseInt(b.year) || 0;
+                    return sortVal === "year-newest" ? (yearB - yearA) : (yearA - yearB);
+                });
             }
             
             list.forEach((item, idx) => {
@@ -2202,6 +2623,8 @@
             
             document.getElementById("selectedCount").textContent = totalSelected;
             document.getElementById("btnBulkScrape").disabled = totalSelected === 0;
+            const copyBtn = document.getElementById("btnCopySelectedUrls");
+            if (copyBtn) copyBtn.disabled = totalSelected === 0;
         }
 
         function selectAllConnected(select) {
@@ -2216,20 +2639,60 @@
         }
 
         function selectQuick(count) {
-            const list = getActiveList();
+            let list = getActiveList();
+            const sortVal = document.getElementById("connectedSortSelect").value;
+            if (sortVal === "year-newest" || sortVal === "year-oldest") {
+                list = [...list].sort((a, b) => {
+                    const yearA = parseInt(a.year) || 0;
+                    const yearB = parseInt(b.year) || 0;
+                    return sortVal === "year-newest" ? (yearB - yearA) : (yearA - yearB);
+                });
+            }
+            
+            // Reset active selection first
+            const activeList = getActiveList();
+            activeList.forEach(item => item.selected = false);
+            
             let selectedCount = 0;
             list.forEach(item => {
                 if (item.scrapable) {
                     if (selectedCount < count) {
                         item.selected = true;
                         selectedCount++;
-                    } else {
-                        item.selected = false;
                     }
                 }
             });
             renderConnectedList();
             updateSelectedCounter();
+        }
+
+        function copySelectedUrlsToClipboard() {
+            const list = getActiveList();
+            const selectedUrls = [];
+            list.forEach(item => {
+                if (item.selected && item.url) {
+                    selectedUrls.push(item.url);
+                }
+            });
+            
+            if (selectedUrls.length === 0) {
+                alert("No papers selected or selected papers have no URLs.");
+                return;
+            }
+            
+            const textToCopy = selectedUrls.join("\n");
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const copyBtn = document.getElementById("btnCopySelectedUrls");
+                const oldContent = copyBtn.innerHTML;
+                copyBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>Copied!</span>`;
+                copyBtn.classList.add("active-success");
+                setTimeout(() => {
+                    copyBtn.innerHTML = oldContent;
+                    copyBtn.classList.remove("active-success");
+                }, 2000);
+            }).catch(err => {
+                alert("Failed to copy URLs to clipboard.");
+            });
         }
 
         async function executeBulkScrape() {
@@ -2402,6 +2865,7 @@
 
         // Standalone IEEE Similarity Search Engine Actions
         let standaloneSearchList = [];
+        let keywordSearchList = [];
 
         async function performStandaloneSimilarSearch() {
             const urlInput = document.getElementById("similarSearchUrl").value.trim();
@@ -2634,6 +3098,229 @@
                     
                     document.getElementById("similarSearchUrl").value = "";
                     standaloneSearchList = [];
+                    
+                    switchDashboardTab('workspace');
+                    renderSubpages(elapsed);
+                } else {
+                    alert(result.error || "An error occurred during bulk scraping.");
+                    resultsSec.style.display = "block";
+                }
+            } catch (err) {
+                alert("Could not connect to the scraper server.");
+                resultsSec.style.display = "block";
+            } finally {
+                loader.style.display = "none";
+            }
+        }
+
+        // IEEE Keyword Search Engine Actions
+        async function performKeywordSearch() {
+            const queryInput = document.getElementById("keywordSearchInput").value.trim();
+            if (!queryInput) return;
+            
+            const loader = document.getElementById("keywordSearchLoader");
+            const resultsSec = document.getElementById("keywordSearchResultsSection");
+            const btn = document.getElementById("btnKeywordSearch");
+            
+            loader.style.display = "flex";
+            resultsSec.style.display = "none";
+            btn.disabled = true;
+            
+            document.getElementById("keywordLoaderText").textContent = "Searching IEEE database...";
+            document.getElementById("keywordLoaderSub").textContent = "Executing search query against live database...";
+            
+            const startTime = performance.now();
+            
+            // Extract active article number if a target paper is loaded in the workspace
+            const activeArticleNumber = currentPaperData ? currentPaperData.articleNumber : null;
+            
+            try {
+                const response = await fetch("/search-by-keywords", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        queryText: queryInput, 
+                        activeArticleNumber: activeArticleNumber 
+                    })
+                });
+                
+                const result = await response.json();
+                if (response.ok && result.success) {
+                    const endTime = performance.now();
+                    const elapsed = ((endTime - startTime) / 1000).toFixed(2);
+                    
+                    document.getElementById("keywordTimeBadge").textContent = `Processed in ${elapsed}s`;
+                    keywordSearchList = result.data.map(item => ({ ...item, selected: false }));
+                    
+                    renderKeywordSearchList();
+                    updateKeywordSelectedCounter();
+                    resultsSec.style.display = "block";
+                } else {
+                    alert(result.error || "Failed to retrieve search results.");
+                }
+            } catch (err) {
+                alert("Could not connect to the search server.");
+            } finally {
+                loader.style.display = "none";
+                btn.disabled = false;
+            }
+        }
+
+        function renderKeywordSearchList() {
+            const container = document.getElementById("keywordSearchList");
+            container.innerHTML = "";
+            
+            if (keywordSearchList.length === 0) {
+                container.innerHTML = `<div style="padding: 3rem; text-align: center; color: var(--text-muted);">
+                    <i class="fa-solid fa-box-open" style="font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                    <p>No search results found for these keywords.</p>
+                </div>`;
+                return;
+            }
+            
+            keywordSearchList.forEach((item, idx) => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "connected-item";
+                
+                // Checkbox column
+                const checkboxWrapper = document.createElement("div");
+                checkboxWrapper.className = "connected-checkbox-wrapper";
+                
+                if (item.scrapable) {
+                    const label = document.createElement("label");
+                    label.className = "checkbox-container";
+                    
+                    const input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.checked = !!item.selected;
+                    input.dataset.index = idx;
+                    input.onchange = (e) => {
+                        item.selected = e.target.checked;
+                        updateKeywordSelectedCounter();
+                    };
+                    
+                    const checkmark = document.createElement("span");
+                    checkmark.className = "checkmark";
+                    
+                    label.appendChild(input);
+                    label.appendChild(checkmark);
+                    checkboxWrapper.appendChild(label);
+                } else {
+                    const badge = document.createElement("span");
+                    badge.className = "connected-badge-unscrapable";
+                    badge.textContent = "External";
+                    checkboxWrapper.appendChild(badge);
+                }
+                
+                const infoDiv = document.createElement("div");
+                infoDiv.className = "connected-info";
+                
+                const titleDiv = document.createElement("div");
+                titleDiv.className = "connected-title";
+                titleDiv.textContent = item.title;
+                infoDiv.appendChild(titleDiv);
+                
+                const metaDiv = document.createElement("div");
+                metaDiv.className = "connected-meta";
+                if (item.authors) {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-user-pen"></i> ${item.authors}</span>`;
+                }
+                if (item.year && item.year !== 'Unknown Year') {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-calendar-days"></i> ${item.year}</span>`;
+                }
+                if (item.articleNumber) {
+                    metaDiv.innerHTML += `<span><i class="fa-solid fa-fingerprint"></i> ID: ${item.articleNumber}</span>`;
+                }
+                if (item.sharedTerms && item.sharedTerms.length > 0) {
+                    metaDiv.innerHTML += `<span style="color: #a5b4fc;"><i class="fa-solid fa-tags"></i> Shared: ${item.sharedTerms.slice(0, 5).join(', ')}${item.sharedTerms.length > 5 ? '...' : ''}</span>`;
+                }
+                infoDiv.appendChild(metaDiv);
+                
+                itemDiv.appendChild(checkboxWrapper);
+                
+                if (item.matchScore !== undefined) {
+                    const scoreWrapper = document.createElement("div");
+                    scoreWrapper.style.minWidth = "65px";
+                    scoreWrapper.style.marginLeft = "0.5rem";
+                    scoreWrapper.innerHTML = `<div class="badge" style="background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3); color: #c084fc; font-weight: 700; width: 100%; justify-content: center; font-size: 0.75rem; padding: 0.25rem 0.5rem;">${item.matchScore}%</div>`;
+                    itemDiv.appendChild(scoreWrapper);
+                }
+                
+                itemDiv.appendChild(infoDiv);
+                container.appendChild(itemDiv);
+            });
+        }
+
+        function updateKeywordSelectedCounter() {
+            let count = 0;
+            keywordSearchList.forEach(item => {
+                if (item.selected && item.scrapable) count++;
+            });
+            document.getElementById("keywordSelectedCount").textContent = count;
+            document.getElementById("btnKeywordBulkScrape").disabled = count === 0;
+        }
+
+        function selectKeywordQuick(count) {
+            let selectedCount = 0;
+            keywordSearchList.forEach(item => {
+                if (item.scrapable) {
+                    if (selectedCount < count) {
+                        item.selected = true;
+                        selectedCount++;
+                    } else {
+                        item.selected = false;
+                    }
+                }
+            });
+            renderKeywordSearchList();
+            updateKeywordSelectedCounter();
+        }
+
+        function selectKeywordAll(select) {
+            keywordSearchList.forEach(item => {
+                if (item.scrapable) item.selected = select;
+            });
+            renderKeywordSearchList();
+            updateKeywordSelectedCounter();
+        }
+
+        async function executeKeywordBulkScrape() {
+            const selectedUrls = [];
+            keywordSearchList.forEach(item => {
+                if (item.selected && item.scrapable && item.url) {
+                    selectedUrls.push(item.url);
+                }
+            });
+            
+            if (selectedUrls.length === 0) return;
+            
+            const loader = document.getElementById("keywordSearchLoader");
+            const resultsSec = document.getElementById("keywordSearchResultsSection");
+            
+            loader.style.display = "flex";
+            resultsSec.style.display = "none";
+            
+            document.getElementById("keywordLoaderText").textContent = `Scraping Batch (0 / ${selectedUrls.length})`;
+            document.getElementById("keywordLoaderSub").textContent = "Resolving WAF verification challenges...";
+            
+            const startTime = performance.now();
+            
+            try {
+                const response = await fetch("/scrape-bulk", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ urls: selectedUrls, delay: 1.5 })
+                });
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    const endTime = performance.now();
+                    const elapsed = ((endTime - startTime) / 1000).toFixed(2);
+                    
+                    scrapedSubpagesList = result.data || [];
+                    
+                    document.getElementById("keywordSearchInput").value = "";
+                    keywordSearchList = [];
                     
                     switchDashboardTab('workspace');
                     renderSubpages(elapsed);

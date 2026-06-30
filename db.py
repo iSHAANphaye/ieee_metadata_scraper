@@ -135,3 +135,22 @@ def authenticate_user(email, password):
     except Exception as e:
         print(f"Error authenticating user {email}: {e}")
         return False, f"Database error: {str(e)}"
+
+def delete_user_data(email):
+    """Delete a user account and all their cached papers data."""
+    users_col = get_users_col()
+    papers_col = get_papers_col()
+    if users_col is None or papers_col is None:
+        return False, "Database connection not available."
+    
+    email = email.strip().lower()
+    try:
+        # Delete user document
+        users_col.delete_one({"_id": email})
+        # Delete all papers scraped by this user
+        res = papers_col.delete_many({"scraped_by": email})
+        print(f"Successfully deleted user account {email} and {res.deleted_count} cached papers.")
+        return True, "Account and all associated papers successfully deleted."
+    except Exception as e:
+        print(f"Error deleting user {email} data: {e}")
+        return False, f"Database error: {str(e)}"
